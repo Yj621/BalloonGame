@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -579,7 +579,7 @@ Transform:
   m_GameObject: {fileID: 210829990}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.76, y: -8.62, z: 0}
+  m_LocalPosition: {x: -6.56, y: -8.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -599,6 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 210829990}
+  balloon: {fileID: 1474028408}
 --- !u!61 &210829996
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1574,6 +1575,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8523650969106926349, guid: 501d3d1bc8d3d70489951b1c07e237ed, type: 3}
       propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523650969106926349, guid: 501d3d1bc8d3d70489951b1c07e237ed, type: 3}
+      propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8891406903067911714, guid: 501d3d1bc8d3d70489951b1c07e237ed, type: 3}
