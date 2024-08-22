@@ -28,19 +28,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(uIController.isPanel == false)
-        {// 마우스를 따라 수평으로 이동
-        FollowMouse();
-
-        // 마우스 클릭 시 위로 힘을 가함
-        if (Input.GetMouseButtonDown(0) && !balloonReleased)
+        if (uIController.isPanel == false)
         {
-            ReleaseBalloon();
-            ApplyUpwardForce();
-        }
+            // 마우스를 따라 수평으로 이동
+            FollowMouse();
+            // 마우스 클릭 시 위로 힘을 가함
+            if (Input.GetMouseButtonDown(0) && !balloonReleased)
+            {
+                ReleaseBalloon();
+                ApplyUpwardForce();
+            }
 
         }
-        
+
     }
 
     private void FollowMouse()
@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         {
             consForce = currentBalloon.AddComponent<ConstantForce2D>(); // 없을 경우 ConstantForce2D 추가
         }
-        
+
         // 처음에는 ConstantForce2D 비활성화
         consForce.enabled = false;
 
@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         {
             balloonRb = currentBalloon.AddComponent<Rigidbody2D>(); // 없을 경우 Rigidbody2D 추가
         }
-        
+
         // 처음에는 물리 효과 비활성화
         balloonRb.isKinematic = true;
 
