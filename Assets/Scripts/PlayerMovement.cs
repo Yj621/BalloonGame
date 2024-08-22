@@ -17,15 +17,19 @@ public class PlayerMovement : MonoBehaviour
 
     private bool balloonReleased = false; // 풍선이 분리되었는지 여부 체크
 
+    UIController uIController;
+
     private void Start()
     {
+        uIController = FindAnyObjectByType<UIController>();
         // 첫 번째 풍선 생성
         SpawnNewBalloon();
     }
 
     private void Update()
     {
-        // 마우스를 따라 수평으로 이동
+        if(uIController.isPanel == false)
+        {// 마우스를 따라 수평으로 이동
         FollowMouse();
 
         // 마우스 클릭 시 위로 힘을 가함
@@ -34,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
             ReleaseBalloon();
             ApplyUpwardForce();
         }
+
+        }
+        
     }
 
     private void FollowMouse()
