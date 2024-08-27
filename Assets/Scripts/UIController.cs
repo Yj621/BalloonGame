@@ -34,9 +34,14 @@ public class UIController : MonoBehaviour
         Application.Quit();
     }
 
+    public void StartScene()
+    {
+        SceneManager.LoadScene("Play Scene");
+    }
+
     public void MainScene()
     {
-
+        SceneManager.LoadScene("Start Scene");
     }
     public void OnRestart()
     {
