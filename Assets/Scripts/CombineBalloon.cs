@@ -1,12 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombineBalloon : MonoBehaviour
 {
     public GameObject[] balloonLevels; // 각 레벨의 풍선 프리팹 배열
     public int currentLevel = 0; // 현재 풍선의 레벨
     private bool hasCollided = false; // 충돌 체크 변수
+    private int[] levelScores = { 2, 4, 8, 16, 32, 64, 128 }; //점수 배열
+    private static int score = 0; // 총 점수를 저장하는 정적 변수
+
+    UIController uIController;
+
+    void Start()
+    {
+        uIController = FindAnyObjectByType<UIController>();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -49,7 +59,10 @@ public class CombineBalloon : MonoBehaviour
                 {
                     //마지막 레벨의 풍선 생성@@@@@@@@@@@@@@
                 }
-
+                score += levelScores[currentLevel];
+                uIController.t_Score.text = score.ToString();
+                Debug.Log("Score: " + score);
+                
                 // 충돌한 두 풍선 제거
                 Destroy(collision.gameObject);
                 Destroy(gameObject);

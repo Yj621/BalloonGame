@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
     public GameObject blockingPanel;
     public GameObject menuPanel;
     public bool isPanel = false;
+    public TextMeshProUGUI t_Score;
 
     void Start()
     {
