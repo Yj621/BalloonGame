@@ -38,9 +38,9 @@ public class CombineBalloon : MonoBehaviour
 
                 // 현재 레벨이 마지막 레벨이 아닌 경우에만 다음 단계의 풍선을 생성
                 if (currentLevel < balloonLevels.Length - 1)
-                {
-                    
+                {                    
                     Vector2 newPosition = (transform.position + collision.transform.position) / 2;
+                    newPosition.y -= 0.1f; // 살짝 아래로 이동하여 충돌 문제 방지
                     GameObject newBalloon = Instantiate(balloonLevels[currentLevel + 1], newPosition, Quaternion.identity);
 
                     // 새로 생성된 풍선의 충돌 처리 비활성화 후 일정 시간 후 활성화
@@ -55,10 +55,12 @@ public class CombineBalloon : MonoBehaviour
                     hasCollided = true;
                     otherBalloon.hasCollided = true;
                 }
+                /*
                 else
                 {
                     //마지막 레벨의 풍선 생성@@@@@@@@@@@@@@
                 }
+                */
                 score += levelScores[currentLevel];
                 uIController.t_Score.text = score.ToString();
                 Debug.Log("Score: " + score);

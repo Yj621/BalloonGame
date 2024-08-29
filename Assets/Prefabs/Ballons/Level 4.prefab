@@ -145,7 +145,7 @@ EdgeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2948814700411272699}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -451,7 +451,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balloonLevels:
-  - {fileID: 2948814700411272699}
+  - {fileID: 2948814700411272699, guid: 1a2b9b77ea34a234193087a79e7565e1, type: 3}
   - {fileID: 2948814700411272699, guid: 23be2288e6c5f4848b832124bc284684, type: 3}
   - {fileID: 2948814700411272699, guid: 52d1ddcc0ccc5e14bb6002bf46f1d442, type: 3}
-  currentLevel: 1
+  - {fileID: 2948814700411272699}
+  - {fileID: 2948814700411272699, guid: d77679872dc0d8b449b9d27db6423bdf, type: 3}
+  - {fileID: 2948814700411272699, guid: bfe80619810f0a442b25796ab0941a8d, type: 3}
+  - {fileID: 2948814700411272699, guid: e7df0861f32d46741af7dc08b38b17e7, type: 3}
+  currentLevel: 3

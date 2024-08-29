@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -305,6 +305,10 @@ PrefabInstance:
     - target: {fileID: 2948814700411272699, guid: e7df0861f32d46741af7dc08b38b17e7, type: 3}
       propertyPath: m_Name
       value: Level 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948814700411272699, guid: e7df0861f32d46741af7dc08b38b17e7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1289,6 +1293,10 @@ PrefabInstance:
     - target: {fileID: 2948814700411272699, guid: 74744a02063dfb3409334eadbd34bd96, type: 3}
       propertyPath: m_Name
       value: Level 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948814700411272699, guid: 74744a02063dfb3409334eadbd34bd96, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3482,6 +3490,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2948814700411272699, guid: 52d1ddcc0ccc5e14bb6002bf46f1d442, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3781,6 +3793,10 @@ PrefabInstance:
     - target: {fileID: 2948814700411272699, guid: bfe80619810f0a442b25796ab0941a8d, type: 3}
       propertyPath: m_Name
       value: Level 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948814700411272699, guid: bfe80619810f0a442b25796ab0941a8d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4498,7 +4514,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.691787}
+  m_Offset: {x: 7.237952, y: -0.76542616}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4509,7 +4525,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 11.439695}
+  m_Size: {x: 15.475904, y: 17.576336}
   m_EdgeRadius: 0
 --- !u!1 &1403580656
 GameObject:
@@ -5869,6 +5885,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2948814700411272699, guid: d77679872dc0d8b449b9d27db6423bdf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6099,7 +6119,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06289005, y: 0}
+  m_Offset: {x: 3.131672, y: 4.5894966}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6110,7 +6130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16.37654, y: 1}
+  m_Size: {x: 22.765663, y: 10.178995}
   m_EdgeRadius: 0
 --- !u!1001 &1842446685
 PrefabInstance:
@@ -6179,6 +6199,10 @@ PrefabInstance:
     - target: {fileID: 2948814700411272699, guid: 23be2288e6c5f4848b832124bc284684, type: 3}
       propertyPath: m_Name
       value: Level 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948814700411272699, guid: 23be2288e6c5f4848b832124bc284684, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6635,7 +6659,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06289005, y: 0}
+  m_Offset: {x: 3.1183076, y: -3.9390073}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6646,7 +6670,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16.37654, y: 1}
+  m_Size: {x: 22.738934, y: 8.878016}
   m_EdgeRadius: 0
 --- !u!1001 &3859596316723722437
 PrefabInstance:
@@ -6703,6 +6727,10 @@ PrefabInstance:
     - target: {fileID: 2948814700411272699, guid: 1a2b9b77ea34a234193087a79e7565e1, type: 3}
       propertyPath: m_Name
       value: Level 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948814700411272699, guid: 1a2b9b77ea34a234193087a79e7565e1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
