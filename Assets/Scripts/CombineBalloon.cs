@@ -40,7 +40,7 @@ public class CombineBalloon : MonoBehaviour
                 if (currentLevel < balloonLevels.Length - 1)
                 {                    
                     Vector2 newPosition = (transform.position + collision.transform.position) / 2;
-                    newPosition.y -= 0.1f; // 살짝 아래로 이동하여 충돌 문제 방지
+                    newPosition.y -= 0.7f; // 살짝 아래로 이동하여 충돌 문제 방지
                     GameObject newBalloon = Instantiate(balloonLevels[currentLevel + 1], newPosition, Quaternion.identity);
 
                     // 새로 생성된 풍선의 충돌 처리 비활성화 후 일정 시간 후 활성화
@@ -48,7 +48,7 @@ public class CombineBalloon : MonoBehaviour
                     if (newBalloonCollider != null)
                     {
                         newBalloonCollider.enabled = false;
-                        StartCoroutine(ReenableCollider(newBalloonCollider, 0.1f)); // 0.1초 후 충돌 처리 활성화
+                        StartCoroutine(ReenableCollider(newBalloonCollider, 0.5f)); // 0.05초 후 충돌 처리 활성화
                     }
                     Debug.Log(balloonLevels.Length);
                     // 현재 풍선과 충돌한 풍선이 추가 충돌되지 않도록 설정(풍선이 새로 생기자마자 추가 충돌로 풍선이 여러개 생성돼 랙 걸림)

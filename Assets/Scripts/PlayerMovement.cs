@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
     private void SpawnNewBalloon()
     {
         // 새로운 위치 설정 (y축을 -2.25로 설정)
-        Vector3 spawnPosition = new Vector3(player.transform.position.x, -7f, -0.6f);
+        Vector3 spawnPosition = new Vector3(player.transform.position.x, -7f, 0f);
 
         // 프리팹에서 새로운 풍선 인스턴스 생성
         currentBalloon = Instantiate(balloonPrefab, spawnPosition, Quaternion.identity);
