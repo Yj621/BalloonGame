@@ -6786,6 +6786,63 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 30.312105, y: 8.878016}
   m_EdgeRadius: 0
+--- !u!1001 &2070074030
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 2d14f9da17fb17b4f900701fc3f11f9b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.48
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2d14f9da17fb17b4f900701fc3f11f9b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.18
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2d14f9da17fb17b4f900701fc3f11f9b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2d14f9da17fb17b4f900701fc3f11f9b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2d14f9da17fb17b4f900701fc3f11f9b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2d14f9da17fb17b4f900701fc3f11f9b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2d14f9da17fb17b4f900701fc3f11f9b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2d14f9da17fb17b4f900701fc3f11f9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2d14f9da17fb17b4f900701fc3f11f9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2d14f9da17fb17b4f900701fc3f11f9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2d14f9da17fb17b4f900701fc3f11f9b, type: 3}
+      propertyPath: m_Name
+      value: Kodari
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2d14f9da17fb17b4f900701fc3f11f9b, type: 3}
 --- !u!1001 &3859596316723722437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6933,3 +6990,4 @@ SceneRoots:
   - {fileID: 635884993}
   - {fileID: 1439045873}
   - {fileID: 298888758}
+  - {fileID: 2070074030}
