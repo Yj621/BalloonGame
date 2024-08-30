@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public GameObject player;
     public GameObject balloonPrefab; // 풍선 프리팹에 대한 참조
+    public GameObject kodari;
+    public GameObject strap;
 
     private GameObject currentBalloon; // 현재 활성화된 풍선
     private ConstantForce2D consForce;
@@ -67,6 +69,9 @@ public class PlayerMovement : MonoBehaviour
         currentBalloon.transform.SetParent(null);
         balloonReleased = true;
 
+        strap.SetActive(false);
+        kodari.SetActive(false);
+
         // ConstantForce2D 활성화
         consForce.enabled = true;
 
@@ -80,10 +85,13 @@ public class PlayerMovement : MonoBehaviour
     private void SpawnNewBalloon()
     {
         // 새로운 위치 설정 (y축을 -2.25로 설정)
-        Vector3 spawnPosition = new Vector3(player.transform.position.x, -7f, 0f);
+        Vector3 spawnPosition = new Vector3(player.transform.position.x, -5.8f, -0.6f);
 
         // 프리팹에서 새로운 풍선 인스턴스 생성
         currentBalloon = Instantiate(balloonPrefab, spawnPosition, Quaternion.identity);
+
+        strap.SetActive(true);
+        kodari.SetActive(true);
 
         // 컴포넌트 설정
         consForce = currentBalloon.GetComponent<ConstantForce2D>();
