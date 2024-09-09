@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class CombineBalloon : MonoBehaviour
 {
-    public GameObject[] balloonLevels; // °¢ ·¹º§ÀÇ Ç³¼± ÇÁ¸®ÆÕ ¹è¿­
-    public int currentLevel = 0; // ÇöÀç Ç³¼±ÀÇ ·¹º§
-    private bool hasCollided = false; // Ãæµ¹ Ã¼Å© º¯¼ö
-    private int[] levelScores = { 2, 4, 8, 16, 32, 64, 128 }; //Á¡¼ö ¹è¿­
-    private static int score = 0; // ÃÑ Á¡¼ö¸¦ ÀúÀåÇÏ´Â Á¤Àû º¯¼ö
+    public GameObject[] balloonLevels; // ê° ë ˆë²¨ì˜ í’ì„ ì„ ì €ì¥í•˜ëŠ” ë°°ì—´
+    public int currentLevel = 0; // í˜„ì¬ í’ì„ ì˜ ë ˆë²¨
+    private bool hasCollided = false; // ì¶©ëŒ ì—¬ë¶€ë¥¼ í™•ì¸í•˜ëŠ” ë³€ìˆ˜
+    private int[] levelScores = { 2, 4, 8, 16, 32, 64, 128 }; // ê° ë ˆë²¨ì— ë”°ë¥¸ ì ìˆ˜ ë°°ì—´
+    private static int score = 0; // ê²Œì„ ì „ì²´ì—ì„œ ê¸°ë¡ë˜ëŠ” ì´ ì ìˆ˜
 
     UIController uIController;
 
@@ -20,52 +20,52 @@ public class CombineBalloon : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // ÀÌ¹Ì Ãæµ¹ Ã³¸®µÈ °æ¿ì ¸®ÅÏ
+        // ì´ë¯¸ ì¶©ëŒ ì²˜ë¦¬ê°€ ëœ ê²½ìš°ì—ëŠ” ë¦¬í„´
         if (hasCollided)
             return;
 
-        // Ãæµ¹ÇÑ ¿ÀºêÁ§Æ®°¡ °°Àº ÅÂ±×ÀÎÁö È®ÀÎ
+        // ì¶©ëŒí•œ ì˜¤ë¸Œì íŠ¸ì˜ íƒœê·¸ê°€ "Balloon"ì¸ì§€ í™•ì¸
         if (collision.gameObject.CompareTag("Balloon"))
         {
             CombineBalloon otherBalloon = collision.gameObject.GetComponent<CombineBalloon>();
 
-            // µÎ Ç³¼±ÀÌ °°Àº ·¹º§ÀÎÁö È®ÀÎ
+            // ë‹¤ë¥¸ í’ì„ ì˜ ë ˆë²¨ì´ ë‚˜ì™€ ê°™ì€ì§€ í™•ì¸
             if (otherBalloon != null && otherBalloon.currentLevel == this.currentLevel)
             {
-                // ÀÌ¹Ì Ãæµ¹ Ã³¸®µÈ °æ¿ì ¸®ÅÏ
+                // ì´ë¯¸ ì¶©ëŒ ì²˜ë¦¬ê°€ ëœ ê²½ìš°ì—ëŠ” ë¦¬í„´
                 if (otherBalloon.hasCollided)
                     return;
 
-                // ÇöÀç ·¹º§ÀÌ ¸¶Áö¸· ·¹º§ÀÌ ¾Æ´Ñ °æ¿ì¿¡¸¸ ´ÙÀ½ ´Ü°èÀÇ Ç³¼±À» »ı¼º
+                // í˜„ì¬ í’ì„ ì˜ ë ˆë²¨ì´ ë§ˆì§€ë§‰ ë ˆë²¨ì´ ì•„ë‹Œ ê²½ìš°ì—ë§Œ ë‹¤ìŒ ë ˆë²¨ì˜ í’ì„ ì„ ìƒì„±
                 if (currentLevel < balloonLevels.Length - 1)
                 {                    
                     Vector2 newPosition = (transform.position + collision.transform.position) / 2;
-                    newPosition.y -= 0.7f; // »ìÂ¦ ¾Æ·¡·Î ÀÌµ¿ÇÏ¿© Ãæµ¹ ¹®Á¦ ¹æÁö
+                    newPosition.y -= 0.7f; // ì‚´ì§ ì•„ë˜ë¡œ ì´ë™í•´ì„œ ì¶©ëŒ í›„ ê²¹ì¹˜ì§€ ì•Šë„ë¡ ì„¤ì •
                     GameObject newBalloon = Instantiate(balloonLevels[currentLevel + 1], newPosition, Quaternion.identity);
 
-                    // »õ·Î »ı¼ºµÈ Ç³¼±ÀÇ Ãæµ¹ Ã³¸® ºñÈ°¼ºÈ­ ÈÄ ÀÏÁ¤ ½Ã°£ ÈÄ È°¼ºÈ­
+                    // ìƒˆë¡œ ìƒì„±ëœ í’ì„ ì˜ ì¶©ëŒ ì²˜ë¦¬ë¥¼ ì ì‹œ ë¹„í™œì„±í™”í•œ í›„ ì¼ì • ì‹œê°„ì´ ì§€ë‚˜ë©´ ë‹¤ì‹œ í™œì„±í™”
                     Collider2D newBalloonCollider = newBalloon.GetComponent<Collider2D>();
                     if (newBalloonCollider != null)
                     {
                         newBalloonCollider.enabled = false;
-                        StartCoroutine(ReenableCollider(newBalloonCollider, 0.5f)); // 0.05ÃÊ ÈÄ Ãæµ¹ Ã³¸® È°¼ºÈ­
+                        StartCoroutine(ReenableCollider(newBalloonCollider, 0.5f)); // 0.05ì´ˆ í›„ì— ì¶©ëŒ ì²˜ë¦¬ í™œì„±í™”
                     }
                     Debug.Log(balloonLevels.Length);
-                    // ÇöÀç Ç³¼±°ú Ãæµ¹ÇÑ Ç³¼±ÀÌ Ãß°¡ Ãæµ¹µÇÁö ¾Êµµ·Ï ¼³Á¤(Ç³¼±ÀÌ »õ·Î »ı±âÀÚ¸¶ÀÚ Ãß°¡ Ãæµ¹·Î Ç³¼±ÀÌ ¿©·¯°³ »ı¼ºµÅ ·¢ °É¸²)
+                    // í˜„ì¬ í’ì„ ê³¼ ë‹¤ë¥¸ í’ì„ ì˜ ì¶©ëŒ ì²˜ë¦¬ë¥¼ ë¹„í™œì„±í™”(í’ì„ ì´ ë” ì´ìƒ ì¶©ëŒí•˜ì§€ ì•Šë„ë¡ ì„¤ì •)
                     hasCollided = true;
                     otherBalloon.hasCollided = true;
                 }
                 /*
                 else
                 {
-                    //¸¶Áö¸· ·¹º§ÀÇ Ç³¼± »ı¼º@@@@@@@@@@@@@@
+                    //ìµœê³  ë ˆë²¨ì¸ í’ì„  ì²˜ë¦¬@@@@@@@@@@@@@@
                 }
                 */
                 score += levelScores[currentLevel];
                 uIController.t_Score.text = score.ToString();
                 Debug.Log("Score: " + score);
                 
-                // Ãæµ¹ÇÑ µÎ Ç³¼± Á¦°Å
+                // ì¶©ëŒí•œ ë‘ í’ì„  ì‚­ì œ
                 Destroy(collision.gameObject);
                 Destroy(gameObject);
             }
@@ -78,3 +78,4 @@ public class CombineBalloon : MonoBehaviour
         collider.enabled = true;
     }
 }
+
