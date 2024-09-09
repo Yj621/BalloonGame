@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641287, b: 0.5748173, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1155,7 +1155,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 210829990}
-  balloonPrefab: {fileID: 2948814700411272699, guid: 1a2b9b77ea34a234193087a79e7565e1, type: 3}
+  balloonPrefabs:
+  - {fileID: 2948814700411272699, guid: 1a2b9b77ea34a234193087a79e7565e1, type: 3}
+  - {fileID: 2948814700411272699, guid: 23be2288e6c5f4848b832124bc284684, type: 3}
+  - {fileID: 2948814700411272699, guid: 52d1ddcc0ccc5e14bb6002bf46f1d442, type: 3}
+  - {fileID: 2948814700411272699, guid: 74744a02063dfb3409334eadbd34bd96, type: 3}
+  - {fileID: 2948814700411272699, guid: d77679872dc0d8b449b9d27db6423bdf, type: 3}
+  - {fileID: 2948814700411272699, guid: bfe80619810f0a442b25796ab0941a8d, type: 3}
+  - {fileID: 2948814700411272699, guid: e7df0861f32d46741af7dc08b38b17e7, type: 3}
   kodari: {fileID: 1758675992}
   strap: {fileID: 555501859}
 --- !u!61 &210829996

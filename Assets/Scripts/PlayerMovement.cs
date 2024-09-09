@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public GameObject player;
-    public GameObject balloonPrefab; // 풍선 프리팹에 대한 참조
+    public GameObject[] balloonPrefabs; // 각 단계의 풍선 프리팹 배열 (빨주노초파 순서)
     public GameObject kodari;
     public GameObject strap;
 
-    private GameObject currentBalloon; // 현재 활성화된 풍선
+    private GameObject currentBalloon;
     private ConstantForce2D consForce;
     private Rigidbody2D balloonRb;
 
@@ -18,104 +18,103 @@ public class PlayerMovement : MonoBehaviour
     private float upwardForce = 10.0f; // 위쪽으로 가하는 힘의 크기
 
     private bool balloonReleased = false; // 풍선이 분리되었는지 여부 체크
+    private List<int> balloonQueue = new List<int>(); // 랜덤 풍선 큐
+    private int currentSetIndex = 0; // 현재 묶음 인덱스
 
     UIController uIController;
 
     private void Start()
     {
         uIController = FindAnyObjectByType<UIController>();
-        // 첫 번째 풍선 생성
+        GenerateBalloonQueue();
         SpawnNewBalloon();
     }
 
     private void Update()
     {
-        if (uIController.isPanel == false)
+        if (!uIController.isPanel)
         {
-            // 마우스를 따라 수평으로 이동
             FollowMouse();
-            // 마우스 클릭 시 위로 힘을 가함
             if (Input.GetMouseButtonDown(0) && !balloonReleased)
             {
                 ReleaseBalloon();
                 ApplyUpwardForce();
             }
-
         }
-
     }
 
     private void FollowMouse()
     {
-        // 마우스 위치를 월드 좌표로 변환
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        // y값은 고정하고 x값만 변경
         Vector3 newPos = player.transform.position;
-        newPos.x = Mathf.Clamp(mousePos.x, minX, maxX); // 플레이어의 x 위치를 제한된 범위 내로 설정
-
-        player.transform.position = newPos; // 새로운 위치로 플레이어 이동
+        newPos.x = Mathf.Clamp(mousePos.x, minX, maxX);
+        player.transform.position = newPos;
     }
 
     private void ApplyUpwardForce()
     {
-        // 위로 힘을 가하여 올라가도록 설정
         balloonRb.AddForce(new Vector2(0, upwardForce), ForceMode2D.Impulse);
     }
 
     private void ReleaseBalloon()
     {
-        // 풍선을 플레이어에서 분리
         currentBalloon.transform.SetParent(null);
         balloonReleased = true;
 
         strap.SetActive(false);
         kodari.SetActive(false);
 
-        // ConstantForce2D 활성화
         consForce.enabled = true;
-
-        // Rigidbody2D 물리 활성화
         balloonRb.isKinematic = false;
 
-        // 다음 클릭 시 새로운 풍선을 생성할 수 있도록 설정
-        Invoke(nameof(SpawnNewBalloon), 0.5f); // 0.5초 후에 새로운 풍선 생성
+        Invoke(nameof(SpawnNewBalloon), 0.5f);
     }
 
     private void SpawnNewBalloon()
     {
-        // 새로운 위치 설정 (y축을 -2.25로 설정)
         Vector3 spawnPosition = new Vector3(player.transform.position.x, -5.8f, -0.6f);
 
-        // 프리팹에서 새로운 풍선 인스턴스 생성
-        currentBalloon = Instantiate(balloonPrefab, spawnPosition, Quaternion.identity);
+        if (balloonQueue.Count == 0)
+        {
+            GenerateBalloonQueue(); // 모든 풍선이 사용된 경우 새로운 묶음 생성
+        }
 
+        int nextBalloonIndex = balloonQueue[0];
+        balloonQueue.RemoveAt(0);
+
+        currentBalloon = Instantiate(balloonPrefabs[nextBalloonIndex], spawnPosition, Quaternion.identity);
         strap.SetActive(true);
         kodari.SetActive(true);
 
-        // 컴포넌트 설정
         consForce = currentBalloon.GetComponent<ConstantForce2D>();
         if (consForce == null)
         {
-            consForce = currentBalloon.AddComponent<ConstantForce2D>(); // 없을 경우 ConstantForce2D 추가
+            consForce = currentBalloon.AddComponent<ConstantForce2D>();
         }
-
-        // 처음에는 ConstantForce2D 비활성화
         consForce.enabled = false;
 
         balloonRb = currentBalloon.GetComponent<Rigidbody2D>();
         if (balloonRb == null)
         {
-            balloonRb = currentBalloon.AddComponent<Rigidbody2D>(); // 없을 경우 Rigidbody2D 추가
+            balloonRb = currentBalloon.AddComponent<Rigidbody2D>();
         }
-
-        // 처음에는 물리 효과 비활성화
         balloonRb.isKinematic = true;
 
-        // 새로운 풍선이 처음에는 플레이어를 따라가도록 설정
         currentBalloon.transform.SetParent(player.transform);
-
-        // 풍선이 분리되었는지 여부 재설정
         balloonReleased = false;
+    }
+
+    private void GenerateBalloonQueue()
+    {
+        // 빨주노초파 묶음 생성
+        int[] balloonSet = { 0, 1, 2, 3, 4 };
+        List<int> shuffledSet = new List<int>(balloonSet);
+
+        for (int i = 0; i < balloonSet.Length; i++)
+        {
+            int randIndex = Random.Range(0, shuffledSet.Count);
+            balloonQueue.Add(shuffledSet[randIndex]);
+            shuffledSet.RemoveAt(randIndex);
+        }
     }
 }
