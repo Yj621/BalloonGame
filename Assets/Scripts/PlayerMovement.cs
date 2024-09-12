@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject kodari;
     public GameObject strap;
     public GameObject balloonCreate;
+    public GameObject deadLine;
 
     private GameObject currentBalloon;
     private ConstantForce2D consForce;
@@ -23,10 +24,12 @@ public class PlayerMovement : MonoBehaviour
     private int currentSetIndex = 0; // 현재 묶음 인덱스
 
     UIController uIController;
+    Dead dead;
 
     private void Start()
     {
         uIController = FindAnyObjectByType<UIController>();
+        dead = FindAnyObjectByType<Dead>();
         GenerateBalloonQueue();
         SpawnNewBalloon();
         balloonCreate = player.transform.Find("Balloon").gameObject; // "Balloon" 오브젝트 찾기
@@ -42,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 ReleaseBalloon();
                 ApplyUpwardForce();
+                dead.Initialize();
             }
         }
     }
@@ -69,6 +73,19 @@ public class PlayerMovement : MonoBehaviour
 
         consForce.enabled = true;
         balloonRb.isKinematic = false;
+        
+        // 모든 풍선들을 찾아서 currentBalloon이 아닌 경우 dead.isInitialized = true로 설정
+        foreach (GameObject balloon in GameObject.FindGameObjectsWithTag("Balloon"))
+        {
+            if (balloon != currentBalloon)
+            {
+                Dead deadScript = balloon.GetComponent<Dead>();
+                if (deadScript != null)
+                {
+                    deadScript.isInitialized = true;
+                }
+            }
+        }
 
         Invoke(nameof(SpawnNewBalloon), 0.5f);
     }
@@ -120,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
 
         balloonReleased = false;
     }
+
 
     private void GenerateBalloonQueue()
     {

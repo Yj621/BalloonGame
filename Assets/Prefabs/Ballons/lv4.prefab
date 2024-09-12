@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 244865058801252099}
   - component: {fileID: 4166202940421425667}
   - component: {fileID: 429401239334116534}
+  - component: {fileID: 1553584566628051443}
   - component: {fileID: 7474320401926353490}
   m_Layer: 0
   m_Name: Level 4
@@ -262,6 +263,18 @@ PolygonCollider2D:
       - {x: 13.697848, y: 543.127}
       - {x: 1.1105347, y: 540.6647}
   m_UseDelaunayMesh: 0
+--- !u!114 &1553584566628051443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400328666457073517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af161fa6278dd45d29168c4384939bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7474320401926353490
 MonoBehaviour:
   m_ObjectHideFlags: 0

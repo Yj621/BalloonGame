@@ -8,19 +8,29 @@ using TMPro;
 public class UIController : MonoBehaviour
 {
     public GameObject blockingPanel;
+    public GameObject blockingimg;
     public GameObject menuPanel;
     public bool isPanel = false;
     public TextMeshProUGUI t_Score;
+
+    public GameObject uiGameOver;
 
     void Start()
     {
         menuPanel.SetActive(false);
         blockingPanel.SetActive(false);
+        uiGameOver.SetActive(false);
     }
 
     void Update()
     {
         
+    }
+
+    public void GameOver()
+    {
+        uiGameOver.SetActive(true);
+        OnBlockingImg();
     }
 
     public void OnBtnMenu()
@@ -57,6 +67,18 @@ public class UIController : MonoBehaviour
     public void OffBlockingPanel()
     {
         blockingPanel.SetActive(false);
+        isPanel = false;        
+    }
+
+    public void OnBlockingImg()
+    {
+        blockingimg.SetActive(true);
+        isPanel = true;
+    }
+
+    public void OffBlockingImg()
+    {
+        blockingimg.SetActive(false);
         isPanel = false;        
     }
 
