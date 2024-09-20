@@ -33,15 +33,27 @@ public class PlayerMovement : MonoBehaviour
         GenerateBalloonQueue();
         SpawnNewBalloon();
         balloonCreate = player.transform.Find("Balloon").gameObject; // "Balloon" 오브젝트 찾기
-
     }
-
+    
     private void Update()
     {
         if (!uIController.isPanel)
         {
             FollowMouse();
-            if (Input.GetMouseButtonDown(0) && !balloonReleased)
+        }
+    }
+    
+
+    public void BtnClick()
+    {
+        OnclickMouse();
+    }
+
+    private void OnclickMouse()
+    {
+        if (!uIController.isPanel)
+        {
+            if (!balloonReleased)
             {
                 ReleaseBalloon();
                 ApplyUpwardForce();
