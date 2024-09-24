@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     public GameObject player;
     public GameObject[] balloonPrefabs; // 각 단계의 풍선 프리팹 배열 (빨주노초파 순서)
+    public Queue<int> balloonQueue = new Queue<int>();  // 풍선 큐
+    public Image nextBalloonImage;  // 다음 풍선을 표시할 UI Image
+    public Sprite[] balloonSprites; // 풍선 이미지 배열
     public GameObject kodari;
     public GameObject strap;
     public GameObject balloonCreate;
@@ -20,8 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private float upwardForce = 10.0f; // 위쪽으로 가하는 힘의 크기
 
     private bool balloonReleased = false; // 풍선이 분리되었는지 여부 체크
-    private List<int> balloonQueue = new List<int>(); // 랜덤 풍선 큐
-    private int currentSetIndex = 0; // 현재 묶음 인덱스
 
     UIController uIController;
     Dead dead;
@@ -100,24 +102,26 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Invoke(nameof(SpawnNewBalloon), 0.5f);
+        UpdateNextBalloonUI();  // UI 업데이트
     }
 
     private void SpawnNewBalloon()
     {
         Vector3 spawnPosition = balloonCreate.transform.position;
 
+        // 큐가 비어 있으면 새로운 큐를 생성
         if (balloonQueue.Count == 0)
         {
-            GenerateBalloonQueue(); // 모든 풍선이 사용된 경우 새로운 묶음 생성
+            GenerateBalloonQueue();
         }
 
-        int nextBalloonIndex = balloonQueue[0];
-        balloonQueue.RemoveAt(0);
+        int nextBalloonIndex = balloonQueue.Dequeue();  // Queue에서 요소 제거 및 반환
 
         // 새로운 풍선을 생성하고 이를 currentBalloon에 할당
         currentBalloon = Instantiate(balloonPrefabs[nextBalloonIndex], spawnPosition, Quaternion.identity);
-        currentBalloon.transform.SetParent(balloonCreate.transform); // "Balloon" 오브젝트의 자식으로 설정
+        currentBalloon.transform.SetParent(balloonCreate.transform);
 
+        UpdateNextBalloonUI();
         // realBalloon을 찾기
         GameObject realBalloon = FindChildWithTag(currentBalloon.transform, "Balloon");
 
@@ -150,29 +154,51 @@ public class PlayerMovement : MonoBehaviour
         balloonReleased = false;
     }
 
-
     private void GenerateBalloonQueue()
     {
+        // 큐를 명확하게 초기화
+        balloonQueue.Clear();
+        
         // 빨주노초파 묶음 생성
         int[] balloonSet = { 0, 1, 2, 3, 4 };
         List<int> shuffledSet = new List<int>(balloonSet);
 
-        for (int i = 0; i < balloonSet.Length; i++)
+        // 풍선 인덱스를 중복 없이 섞어서 큐에 추가
+        while (shuffledSet.Count > 0)
         {
             int randIndex = Random.Range(0, shuffledSet.Count);
-            balloonQueue.Add(shuffledSet[randIndex]);
-            shuffledSet.RemoveAt(randIndex);
+            balloonQueue.Enqueue(shuffledSet[randIndex]); // Queue 사용
+            shuffledSet.RemoveAt(randIndex); // 사용한 인덱스를 제거하여 중복 방지
         }
     }
+
+
+    // 큐에서 다음 풍선을 표시하는 메서드
+    private void UpdateNextBalloonUI()
+    {
+        // 큐가 비어 있으면 새로운 큐를 생성
+        if (balloonQueue.Count == 0)
+        {
+            GenerateBalloonQueue();
+        }
+
+        // 큐에서 다음 풍선을 확인하여 스프라이트 갱신
+        if (balloonQueue.Count > 0)
+        {
+            int nextBalloon = balloonQueue.Peek();  // 큐에서 다음 풍선 확인 (제거하지 않음)
+            nextBalloonImage.sprite = balloonSprites[nextBalloon];  // 다음 풍선 스프라이트 UI 갱신
+        }
+    }
+
 
     private GameObject FindChildWithTag(Transform parent, string tag)
     {
         // 부모 오브젝트의 모든 자식 오브젝트를 순회
         foreach (Transform child in parent)
         {
-            if (child.CompareTag(tag))
+            if (child.CompareTag(tag))  // 자식이 해당 태그를 가지고 있는지 확인
             {
-                return child.gameObject;
+                return child.gameObject;  // 태그가 일치하면 그 자식 오브젝트 반환
             }
 
             // 자식 오브젝트의 자식 오브젝트를 재귀적으로 탐색
