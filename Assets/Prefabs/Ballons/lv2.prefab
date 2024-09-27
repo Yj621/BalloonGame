@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af161fa6278dd45d29168c4384939bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInitialized: 0
 --- !u!50 &1124595777218599056
 Rigidbody2D:
   serializedVersion: 4
@@ -307,7 +308,7 @@ GameObject:
   - component: {fileID: 2454164996376402322}
   m_Layer: 0
   m_Name: lv2
-  m_TagString: Untagged
+  m_TagString: Balloon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

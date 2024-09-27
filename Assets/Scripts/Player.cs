@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public GameObject strap;
     public GameObject balloonCreate;
     public GameObject deadLine;
+    public Sprite holdSprite;
+    public Sprite putSprite;
 
     private GameObject currentBalloon;
     private ConstantForce2D consForce;
@@ -43,6 +45,8 @@ public class Player : MonoBehaviour
         {
             FollowMouse();
         }
+        
+        Debug.Log(balloonReleased);
     }
     
 
@@ -60,6 +64,8 @@ public class Player : MonoBehaviour
                 ReleaseBalloon();
                 ApplyUpwardForce();
                 dead.Initialize();
+                SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+                spriteRenderer.sprite = putSprite;
             }
         }
     }
@@ -107,6 +113,9 @@ public class Player : MonoBehaviour
 
     private void SpawnNewBalloon()
     {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = holdSprite;
+        
         Vector3 spawnPosition = balloonCreate.transform.position;
 
         // 큐가 비어 있으면 새로운 큐를 생성

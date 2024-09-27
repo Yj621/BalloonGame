@@ -8,7 +8,7 @@ public class CombineBalloon : MonoBehaviour
     public GameObject[] balloonLevels; // 각 레벨의 풍선을 저장하는 배열
     public int currentLevel = 0; // 현재 풍선의 레벨
     private bool hasCollided = false; // 충돌 여부를 확인하는 변수
-    private int[] levelScores = { 2, 4, 8, 16, 32, 64, 128 }; // 각 레벨에 따른 점수 배열
+    private int[] levelScores = { 2, 3, 5, 8, 12, 16, 20 }; // 각 레벨에 따른 점수 배열
     private static int score = 0; // 게임 전체에서 기록되는 총 점수
 
     UIController uIController;
@@ -33,8 +33,8 @@ public class CombineBalloon : MonoBehaviour
                     return;
 
                 if (currentLevel < balloonLevels.Length - 1)
-                {                    
-                    Vector2 newPosition = (transform.position + collision.transform.position) / 2;
+                {
+                    Vector2 newPosition = (transform.position + collision.transform.position);
                     newPosition.y -= 0.7f;
                     GameObject newBalloon = Instantiate(balloonLevels[currentLevel + 1], newPosition, Quaternion.identity);
 
@@ -52,6 +52,7 @@ public class CombineBalloon : MonoBehaviour
                 score += levelScores[currentLevel];
                 uIController.t_Score.text = score.ToString();
                 Destroy(collision.gameObject);
+                Destroy(transform.parent.gameObject);
                 Destroy(gameObject);
             }
         }

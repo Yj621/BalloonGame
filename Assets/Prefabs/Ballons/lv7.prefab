@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 19772156411654493}
   m_Layer: 0
   m_Name: lv7
-  m_TagString: Untagged
+  m_TagString: Balloon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af161fa6278dd45d29168c4384939bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInitialized: 0
 --- !u!247 &5535205857084740602
 ConstantForce2D:
   m_ObjectHideFlags: 0
