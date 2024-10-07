@@ -22,8 +22,8 @@ public class Player : MonoBehaviour
     private ConstantForce2D consForce;
     private Rigidbody2D balloonRb;
 
-    private float minX = -5.77f; // x축의 최소 위치
-    private float maxX = 5.77f;  // x축의 최대 위치
+    private float minX = -5.44f; // x축의 최소 위치
+    private float maxX = 5.1f;  // x축의 최대 위치
     private float upwardForce = 10.0f; // 위쪽으로 가하는 힘의 크기
 
     private bool balloonReleased = false; // 풍선이 분리되었는지 여부 체크
