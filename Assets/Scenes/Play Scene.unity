@@ -1054,6 +1054,7 @@ MonoBehaviour:
   deadLine: {fileID: 1625986872}
   holdSprite: {fileID: 21300000, guid: 1cae0e4cd947a8640bb695b359a45194, type: 3}
   putSprite: {fileID: 21300000, guid: 9028244f73d027f408aa48e26cc8c8c6, type: 3}
+  releaseBalloonBtn: {fileID: 1901038944}
 --- !u!61 &210829996
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -16,7 +16,8 @@ public class Player : MonoBehaviour
     public GameObject deadLine;
     public Sprite holdSprite;
     public Sprite putSprite;
-
+    public Button releaseBalloonBtn; //ReleaseBalloonBtn
+    
     private GameObject currentBalloon;
     private ConstantForce2D consForce;
     private Rigidbody2D balloonRb;
@@ -26,6 +27,8 @@ public class Player : MonoBehaviour
     private float upwardForce = 10.0f; // 위쪽으로 가하는 힘의 크기
 
     private bool balloonReleased = false; // 풍선이 분리되었는지 여부 체크
+
+
 
     UIController uIController;
     Dead dead;
@@ -52,7 +55,18 @@ public class Player : MonoBehaviour
 
     public void BtnClick()
     {
-        OnclickMouse();
+        if (releaseBalloonBtn.interactable)
+        {
+            OnclickMouse();
+            StartCoroutine(DisableButtonTemporarily());
+        }
+    }
+
+    private IEnumerator DisableButtonTemporarily()
+    {
+        releaseBalloonBtn.interactable = false;  // 버튼 비활성화
+        yield return new WaitForSeconds(0.5f);  // 0.5초 후 다시 활성화
+        releaseBalloonBtn.interactable = true;  // 버튼 활성화
     }
 
     private void OnclickMouse()
