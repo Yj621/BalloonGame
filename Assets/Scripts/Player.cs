@@ -145,30 +145,29 @@ public class Player : MonoBehaviour
         currentBalloon.transform.SetParent(balloonCreate.transform);
 
         UpdateNextBalloonUI();
-        // realBalloon을 찾기
-        GameObject realBalloon = FindChildWithTag(currentBalloon.transform, "Balloon");
+        
 
-        if (realBalloon != null)
+        if (currentBalloon != null)
         {
-            // realBalloon의 ConstantForce2D 설정
-            consForce = realBalloon.GetComponent<ConstantForce2D>();
+            // currentBalloon의 ConstantForce2D 설정
+            consForce = currentBalloon.GetComponent<ConstantForce2D>();
             if (consForce == null)
             {
-                consForce = realBalloon.AddComponent<ConstantForce2D>();
+                consForce = currentBalloon.AddComponent<ConstantForce2D>();
             }
             consForce.enabled = false; // 기본적으로 비활성화
 
-            // realBalloon의 Rigidbody2D 설정
-            balloonRb = realBalloon.GetComponent<Rigidbody2D>();
+            // currentBalloon의 Rigidbody2D 설정
+            balloonRb = currentBalloon.GetComponent<Rigidbody2D>();
             if (balloonRb == null)
             {
-                balloonRb = realBalloon.AddComponent<Rigidbody2D>();
+                balloonRb = currentBalloon.AddComponent<Rigidbody2D>();
             }
             balloonRb.isKinematic = true; // 기본적으로 중력과 상호작용하지 않도록 설정
         }
         else
         {
-            Debug.LogWarning("태그 'Balloon'을 가진 realBalloon을 찾을 수 없습니다.");
+            Debug.LogWarning("태그 'Balloon'을 가진 currentBalloon을 찾을 수 없습니다.");
         }
 
         strap.SetActive(true);
@@ -214,7 +213,7 @@ public class Player : MonoBehaviour
     }
 
 
-    private GameObject FindChildWithTag(Transform parent, string tag)
+/*    private GameObject FindChildWithTag(Transform parent, string tag)
     {
         // 부모 오브젝트의 모든 자식 오브젝트를 순회
         foreach (Transform child in parent)
@@ -234,6 +233,6 @@ public class Player : MonoBehaviour
 
         // 태그를 가진 오브젝트를 찾지 못했을 경우 null 반환
         return null;
-    }
+    }*/
 
 }
