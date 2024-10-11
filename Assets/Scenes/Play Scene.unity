@@ -2634,6 +2634,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1319857364}
+        m_TargetAssemblyTypeName: SoundController, Assembly-CSharp
+        m_MethodName: PlayBtnSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &602926112
 GameObject:
   m_ObjectHideFlags: 0
@@ -4723,6 +4735,7 @@ GameObject:
   - component: {fileID: 1331793587}
   - component: {fileID: 1331793589}
   - component: {fileID: 1331793588}
+  - component: {fileID: 1331793590}
   m_Layer: 5
   m_Name: X Button
   m_TagString: Untagged
@@ -4788,6 +4801,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331793586}
   m_CullTransparentMesh: 1
+--- !u!114 &1331793590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331793586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1331793588}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 402633611}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 481052123}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: OffBlockingPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1319857364}
+        m_TargetAssemblyTypeName: SoundController, Assembly-CSharp
+        m_MethodName: PlayBtnSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1371398407
 GameObject:
   m_ObjectHideFlags: 0
@@ -8524,6 +8617,10 @@ PrefabInstance:
       value: lv7
       objectReference: {fileID: 0}
     - target: {fileID: 3962426668322776899, guid: 8052f558bd2b64af288bd76b6ed6d72f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962426668322776899, guid: 8052f558bd2b64af288bd76b6ed6d72f, type: 3}
       propertyPath: m_TagString
       value: Balloon
       objectReference: {fileID: 0}
@@ -8618,6 +8715,10 @@ PrefabInstance:
       value: lv6
       objectReference: {fileID: 0}
     - target: {fileID: 1740577794103087444, guid: dd2c829d064ca46cb87946f58572f478, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740577794103087444, guid: dd2c829d064ca46cb87946f58572f478, type: 3}
       propertyPath: m_TagString
       value: Balloon
       objectReference: {fileID: 0}
@@ -8683,6 +8784,10 @@ PrefabInstance:
       value: lv3
       objectReference: {fileID: 0}
     - target: {fileID: 4849854925193722984, guid: 0dda70fe0710040528219ba5c715440a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849854925193722984, guid: 0dda70fe0710040528219ba5c715440a, type: 3}
       propertyPath: m_TagString
       value: Balloon
       objectReference: {fileID: 0}
@@ -8746,6 +8851,10 @@ PrefabInstance:
     - target: {fileID: 2007212268590410662, guid: b74e9fd00411c467d8832d5a45f40567, type: 3}
       propertyPath: m_Name
       value: lv4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007212268590410662, guid: b74e9fd00411c467d8832d5a45f40567, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2007212268590410662, guid: b74e9fd00411c467d8832d5a45f40567, type: 3}
       propertyPath: m_TagString
@@ -8857,6 +8966,10 @@ PrefabInstance:
       value: lv5
       objectReference: {fileID: 0}
     - target: {fileID: 6396014038448805670, guid: d46216ae0c88a41a6a6f6f9f5060f46d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396014038448805670, guid: d46216ae0c88a41a6a6f6f9f5060f46d, type: 3}
       propertyPath: m_TagString
       value: Balloon
       objectReference: {fileID: 0}
@@ -8916,6 +9029,10 @@ PrefabInstance:
     - target: {fileID: 8243724519063870131, guid: 7ba478039dff9436baad7bb4ed6631f4, type: 3}
       propertyPath: m_Name
       value: lv2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243724519063870131, guid: 7ba478039dff9436baad7bb4ed6631f4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8243724519063870131, guid: 7ba478039dff9436baad7bb4ed6631f4, type: 3}
       propertyPath: m_TagString
