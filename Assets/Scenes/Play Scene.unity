@@ -1034,13 +1034,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 210829990}
   balloonPrefabs:
-  - {fileID: 4155240953114894795, guid: 6c8bed029e619ae4ea34f73910b109ce, type: 3}
-  - {fileID: 8243724519063870131, guid: 7ba478039dff9436baad7bb4ed6631f4, type: 3}
-  - {fileID: 4849854925193722984, guid: 0dda70fe0710040528219ba5c715440a, type: 3}
-  - {fileID: 2007212268590410662, guid: b74e9fd00411c467d8832d5a45f40567, type: 3}
-  - {fileID: 6396014038448805670, guid: d46216ae0c88a41a6a6f6f9f5060f46d, type: 3}
-  - {fileID: 1740577794103087444, guid: dd2c829d064ca46cb87946f58572f478, type: 3}
-  - {fileID: 3962426668322776899, guid: 8052f558bd2b64af288bd76b6ed6d72f, type: 3}
+  - {fileID: 8404715589136038492, guid: 75000d2f0b94e3c478005846da8d8dab, type: 3}
+  - {fileID: 8404715589136038492, guid: 568dd5f9e3321c74ebe1f01c4b976da7, type: 3}
+  - {fileID: 8404715589136038492, guid: 4fb3ebf8d6fc8b8498bf88c73ae326de, type: 3}
+  - {fileID: 8404715589136038492, guid: b5f677eea6c0c374883ede8731c80541, type: 3}
+  - {fileID: 8404715589136038492, guid: 73295adf3bace70499872764c7dd4213, type: 3}
+  - {fileID: 8404715589136038492, guid: 78ef520c0aa3ccb4fbed71b172573ba5, type: 3}
+  - {fileID: 8404715589136038492, guid: f4be350856cf3c74081e297172349e1c, type: 3}
   nextBalloonImage: {fileID: 1737449004}
   balloonSprites:
   - {fileID: 21300000, guid: b50ffc1d370b14a15abf68d2bb239586, type: 3}

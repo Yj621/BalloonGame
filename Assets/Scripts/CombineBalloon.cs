@@ -52,7 +52,7 @@ public class CombineBalloon : MonoBehaviour
                 score += levelScores[currentLevel];
                 uIController.t_Score.text = score.ToString();
                 Destroy(collision.gameObject);
-                Destroy(transform.parent.gameObject);
+                //Destroy(transform.parent.gameObject);
                 Destroy(gameObject);
             }
         }
