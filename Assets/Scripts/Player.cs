@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
         int nextBalloonIndex = balloonQueue.Dequeue();  // Queue에서 요소 제거 및 반환
 
         // 새로운 풍선을 생성하고 이를 currentBalloon에 할당
-        currentBalloon = Instantiate(balloonPrefabs[nextBalloonIndex], spawnPosition, Quaternion.identity);
+        currentBalloon = Instantiate(balloonPrefabs[nextBalloonIndex], spawnPosition,Quaternion.Euler(0, 0, -90));
         currentBalloon.transform.SetParent(balloonCreate.transform);
 
         UpdateNextBalloonUI();
