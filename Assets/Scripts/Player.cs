@@ -31,12 +31,10 @@ public class Player : MonoBehaviour
 
 
     UIController uIController;
-    Dead dead;
 
     private void Start()
     {
         uIController = FindAnyObjectByType<UIController>();
-        dead = FindAnyObjectByType<Dead>();
         GenerateBalloonQueue();
         SpawnNewBalloon();
         balloonCreate = player.transform.Find("Balloon").gameObject; // "Balloon" 오브젝트 찾기
@@ -49,7 +47,6 @@ public class Player : MonoBehaviour
             FollowMouse();
         }
         
-        Debug.Log(balloonReleased);
     }
     
 
@@ -77,7 +74,7 @@ public class Player : MonoBehaviour
             {
                 ReleaseBalloon();
                 ApplyUpwardForce();
-                dead.Initialize();
+                Dead.Instance.Initialize();
                 SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
                 spriteRenderer.sprite = putSprite;
             }

@@ -6,10 +6,22 @@ public class Dead : MonoBehaviour
 {
     public bool isInitialized = false;
     UIController uIController;
+    public int resultScore;
+    CombineBalloon combineBalloon;
+    private static Dead instance;
+    public static Dead Instance
+    {
+        get { return instance; }
+    }
 
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start() 
     {
-        uIController = FindAnyObjectByType<UIController>();    
+        uIController = FindAnyObjectByType<UIController>();
+        combineBalloon = FindAnyObjectByType<CombineBalloon>();
     }
 
     public void Initialize()
@@ -23,6 +35,9 @@ public class Dead : MonoBehaviour
         {
             Debug.Log("dead");
             uIController.GameOver();
+            resultScore = GameManager.Instance._score;
+            combineBalloon.score = resultScore;
+            Debug.Log("resultScore : " + resultScore);
         }
     }
 }
