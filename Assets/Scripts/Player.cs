@@ -160,6 +160,8 @@ public class Player : MonoBehaviour
                 balloonRb = currentBalloon.AddComponent<Rigidbody2D>();
             }
             balloonRb.isKinematic = true; // 기본적으로 중력과 상호작용하지 않도록 설정
+            
+            kodari.GetComponent<MeshRenderer>().material = currentBalloon.GetComponent<MeshRenderer>().material;
         }
         else
         {
