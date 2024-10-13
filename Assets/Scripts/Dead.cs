@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Dead : MonoBehaviour
 {
-    public bool isInitialized = false;
+    public bool isReleased = false;
     UIController uIController;
     public int resultScore;
-    CombineBalloon combineBalloon;
     private static Dead instance;
     public static Dead Instance
     {
@@ -21,23 +21,21 @@ public class Dead : MonoBehaviour
     private void Start() 
     {
         uIController = FindAnyObjectByType<UIController>();
-        combineBalloon = FindAnyObjectByType<CombineBalloon>();
     }
 
     public void Initialize()
     {
-        isInitialized = true;
+        isReleased = true;
     }
     
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (isInitialized && other.gameObject.CompareTag("Dead"))
+        if (isReleased && other.gameObject.CompareTag("Dead"))
         {
-            Debug.Log("dead");
             uIController.GameOver();
-            resultScore = GameManager.Instance._score;
-            combineBalloon.score = resultScore;
-            Debug.Log("resultScore : " + resultScore);
+            resultScore = CombineBalloon.currentScore;
+            GameManager.Instance.resultScoreText.text = resultScore.ToString();
+            PlayerPrefs.SetInt("ResultScore", resultScore); 
         }
     }
 }

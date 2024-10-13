@@ -7,7 +7,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI resultScoreText;
-    public int _score;
     private static GameManager instance;
     public static GameManager Instance
     {
@@ -26,6 +25,5 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        _score = Convert.ToInt32(resultScoreText.text);
     }
 }

@@ -105,15 +105,14 @@ public class Player : MonoBehaviour
         consForce.enabled = true;
         balloonRb.isKinematic = false;
         
-        // 모든 풍선들을 찾아서 currentBalloon이 아닌 경우 dead.isInitialized = true로 설정
+        // 모든 풍선들을 찾아서 currentBalloon이 아닌 경우 dead.isReleased = true로 설정
         foreach (GameObject balloon in GameObject.FindGameObjectsWithTag("Balloon"))
         {
             if (balloon != currentBalloon)
             {
-                Dead deadScript = balloon.GetComponent<Dead>();
-                if (deadScript != null)
+                if (Dead.Instance != null)
                 {
-                    deadScript.isInitialized = true;
+                    Dead.Instance.isReleased = true;
                 }
             }
         }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 111891140}
   - component: {fileID: 111891139}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: 2nd_Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -814,7 +814,7 @@ GameObject:
   - component: {fileID: 662661253}
   - component: {fileID: 662661252}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: 3rd_Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2115,7 +2115,7 @@ GameObject:
   - component: {fileID: 1389469850}
   - component: {fileID: 1389469849}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: 1st_Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2757,6 +2757,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rankPanel: {fileID: 1731234244}
   blockingPanel: {fileID: 1891473133}
+  scores:
+  - {fileID: 1389469849}
+  - {fileID: 111891139}
+  - {fileID: 662661252}
 --- !u!1 &1592677303
 GameObject:
   m_ObjectHideFlags: 0

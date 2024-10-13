@@ -9,7 +9,7 @@ public class CombineBalloon : MonoBehaviour
     public int currentLevel = 0; // 현재 풍선의 레벨
     private bool hasCollided = false; // 충돌 여부를 확인하는 변수
     private int[] levelScores = { 2, 3, 5, 8, 12, 16, 20 }; // 각 레벨에 따른 점수 배열
-    public int score = 0; // 게임 전체에서 기록되는 총 점수
+    public static int currentScore = 0; // 게임 전체에서 기록되는 총 점수
 
     UIController uIController;
 
@@ -49,8 +49,11 @@ public class CombineBalloon : MonoBehaviour
                     otherBalloon.hasCollided = true;
                 }
 
-                score += levelScores[currentLevel];
-                uIController.t_Score.text = score.ToString();
+                currentScore += levelScores[currentLevel];
+
+                uIController.t_Score.text = currentScore.ToString();
+
+
                 Destroy(collision.gameObject);
                 //Destroy(transform.parent.gameObject);
                 Destroy(gameObject);
@@ -62,5 +65,8 @@ public class CombineBalloon : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         collider.enabled = true;
+    }
+    void Update()
+    {
     }
 }
