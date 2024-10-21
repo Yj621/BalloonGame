@@ -57,6 +57,7 @@ public class CombineBalloon : MonoBehaviour
                 Destroy(collision.gameObject);
                 //Destroy(transform.parent.gameObject);
                 Destroy(gameObject);
+                Dead.Instance.isReleased = true;
             }
         }
     }

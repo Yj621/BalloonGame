@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
             {
                 ReleaseBalloon();
                 ApplyUpwardForce();
-                Dead.Instance.Initialize();
+                Dead.Instance.isReleased = true;
                 SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
                 spriteRenderer.sprite = putSprite;
             }

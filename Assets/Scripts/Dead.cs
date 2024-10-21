@@ -23,10 +23,6 @@ public class Dead : MonoBehaviour
         uIController = FindAnyObjectByType<UIController>();
     }
 
-    public void Initialize()
-    {
-        isReleased = true;
-    }
     
     private void OnTriggerEnter2D(Collider2D other) 
     {
