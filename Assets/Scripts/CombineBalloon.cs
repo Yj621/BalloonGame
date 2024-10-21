@@ -56,9 +56,14 @@ public class CombineBalloon : MonoBehaviour
                 Destroy(collision.gameObject);
                 //Destroy(transform.parent.gameObject);
                 Destroy(gameObject);
-                Dead.Instance.isReleased = true;
             }
         }
+
+        Invoke(nameof(Release), 1f);
+    }
+    public void Release()
+    {
+        Dead.Instance.isReleased = true;
     }
 
     private IEnumerator ReenableCollider(Collider2D collider, float delay)
