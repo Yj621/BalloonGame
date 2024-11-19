@@ -27,6 +27,7 @@ public class CombineBalloon : MonoBehaviour
         {
             CombineBalloon otherBalloon = collision.gameObject.GetComponent<CombineBalloon>();
 
+
             if (otherBalloon != null && otherBalloon.currentLevel == this.currentLevel)
             {
                 if (otherBalloon.hasCollided)
@@ -59,13 +60,12 @@ public class CombineBalloon : MonoBehaviour
             }
         }
 
-        Invoke(nameof(Release), 1f);
+        Invoke(nameof(Release), 2f);
     }
     public void Release()
     {
         Dead.Instance.isReleased = true;
     }
-
     private IEnumerator ReenableCollider(Collider2D collider, float delay)
     {
         yield return new WaitForSeconds(delay);
