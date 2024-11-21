@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     public GameObject menuPanel;
     public bool isPanel = false;
     public TextMeshProUGUI t_Score;
+    public TextMeshProUGUI b_Score;
 
     public GameObject uiGameOver;
 
