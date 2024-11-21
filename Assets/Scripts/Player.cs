@@ -17,18 +17,17 @@ public class Player : MonoBehaviour
     public Sprite holdSprite;
     public Sprite putSprite;
     public Button releaseBalloonBtn; //ReleaseBalloonBtn
-    
+
     private GameObject currentBalloon;
     private ConstantForce2D consForce;
     private Rigidbody2D balloonRb;
 
     private float minX = -5.44f; // x축의 최소 위치
-    private float maxX = 5.1f;  // x축의 최대 위치
+    private float maxX = 5.1f;  // x축의 최대
     private float upwardForce = 10.0f; // 위쪽으로 가하는 힘의 크기
+    private float shuffledBalloonWidth; //셔플한 풍선의 x값
 
     private bool balloonReleased = false; // 풍선이 분리되었는지 여부 체크
-
-
 
     UIController uIController;
 
@@ -39,16 +38,14 @@ public class Player : MonoBehaviour
         SpawnNewBalloon();
         balloonCreate = player.transform.Find("Balloon").gameObject; // "Balloon" 오브젝트 찾기
     }
-    
+
     private void Update()
     {
         if (!uIController.isPanel)
         {
             FollowMouse();
         }
-        
     }
-    
 
     public void BtnClick()
     {
@@ -85,7 +82,7 @@ public class Player : MonoBehaviour
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 newPos = player.transform.position;
-        newPos.x = Mathf.Clamp(mousePos.x, minX, maxX);
+        newPos.x = Mathf.Clamp(mousePos.x, minX + (shuffledBalloonWidth / 2), maxX - (shuffledBalloonWidth / 2));
         player.transform.position = newPos;
     }
 
@@ -104,7 +101,7 @@ public class Player : MonoBehaviour
 
         consForce.enabled = true;
         balloonRb.isKinematic = false;
-        
+
         // 모든 풍선들을 찾아서 currentBalloon이 아닌 경우 dead.isReleased = true로 설정
         foreach (GameObject balloon in GameObject.FindGameObjectsWithTag("Balloon"))
         {
@@ -125,7 +122,7 @@ public class Player : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = holdSprite;
-        
+
         Vector3 spawnPosition = balloonCreate.transform.position;
 
         // 큐가 비어 있으면 새로운 큐를 생성
@@ -137,35 +134,53 @@ public class Player : MonoBehaviour
         int nextBalloonIndex = balloonQueue.Dequeue();  // Queue에서 요소 제거 및 반환
 
         // 새로운 풍선을 생성하고 이를 currentBalloon에 할당
-        currentBalloon = Instantiate(balloonPrefabs[nextBalloonIndex], spawnPosition,Quaternion.Euler(0, 0, -90));
+        currentBalloon = Instantiate(balloonPrefabs[nextBalloonIndex], spawnPosition, Quaternion.Euler(0, 0, -90));
         currentBalloon.transform.SetParent(balloonCreate.transform);
 
+        // EdgeCollider2D의 x축 길이 계산(player 축이 풍선 크기에 따라 움직일 수 있는 범위가 변하게 하기 위함)
+        EdgeCollider2D edgeCollider = currentBalloon.GetComponent<EdgeCollider2D>();
+        if (edgeCollider != null)
+        {
+            Vector2[] points = edgeCollider.points;
+
+            float minX = float.MaxValue;
+            float maxX = float.MinValue;
+
+            foreach (Vector2 point in points)
+            {
+                float worldX = currentBalloon.transform.TransformPoint(point).x; // 로컬 좌표를 월드 좌표로 변환
+                if (worldX < minX) minX = worldX;
+                if (worldX > maxX) maxX = worldX;
+            }
+
+            shuffledBalloonWidth = maxX - minX; // x축 길이 계산
+            edgeCollider.enabled = false; // 필요한 경우 비활성화
+        }
+        else
+        {
+            Debug.LogWarning("Current Balloon에는 EdgeCollider2D가 없습니다.");
+            shuffledBalloonWidth = 0; // 기본값 설정
+        }
+
         UpdateNextBalloonUI();
-        
 
         if (currentBalloon != null)
         {
-            // currentBalloon의 ConstantForce2D 설정
             consForce = currentBalloon.GetComponent<ConstantForce2D>();
             if (consForce == null)
             {
                 consForce = currentBalloon.AddComponent<ConstantForce2D>();
             }
-            consForce.enabled = false; // 기본적으로 비활성화
+            consForce.enabled = false;
 
-            // currentBalloon의 Rigidbody2D 설정
             balloonRb = currentBalloon.GetComponent<Rigidbody2D>();
             if (balloonRb == null)
             {
                 balloonRb = currentBalloon.AddComponent<Rigidbody2D>();
             }
-            balloonRb.isKinematic = true; // 기본적으로 중력과 상호작용하지 않도록 설정
-            
+            balloonRb.isKinematic = true;
+
             kodari.GetComponent<MeshRenderer>().material = currentBalloon.GetComponent<MeshRenderer>().material;
-        }
-        else
-        {
-            Debug.LogWarning("태그 'Balloon'을 가진 currentBalloon을 찾을 수 없습니다.");
         }
 
         strap.SetActive(true);
@@ -176,61 +191,29 @@ public class Player : MonoBehaviour
 
     private void GenerateBalloonQueue()
     {
-        // 큐를 명확하게 초기화
         balloonQueue.Clear();
-        
-        // 빨주노초파 묶음 생성
         int[] balloonSet = { 0, 1, 2, 3, 4 };
         List<int> shuffledSet = new List<int>(balloonSet);
 
-        // 풍선 인덱스를 중복 없이 섞어서 큐에 추가
         while (shuffledSet.Count > 0)
         {
             int randIndex = Random.Range(0, shuffledSet.Count);
-            balloonQueue.Enqueue(shuffledSet[randIndex]); // Queue 사용
-            shuffledSet.RemoveAt(randIndex); // 사용한 인덱스를 제거하여 중복 방지
+            balloonQueue.Enqueue(shuffledSet[randIndex]);
+            shuffledSet.RemoveAt(randIndex);
         }
     }
 
-
-    // 큐에서 다음 풍선을 표시하는 메서드
     private void UpdateNextBalloonUI()
     {
-        // 큐가 비어 있으면 새로운 큐를 생성
         if (balloonQueue.Count == 0)
         {
             GenerateBalloonQueue();
         }
 
-        // 큐에서 다음 풍선을 확인하여 스프라이트 갱신
         if (balloonQueue.Count > 0)
         {
-            int nextBalloon = balloonQueue.Peek();  // 큐에서 다음 풍선 확인 (제거하지 않음)
-            nextBalloonImage.sprite = balloonSprites[nextBalloon];  // 다음 풍선 스프라이트 UI 갱신
+            int nextBalloon = balloonQueue.Peek();
+            nextBalloonImage.sprite = balloonSprites[nextBalloon];
         }
     }
-
-
-/*    private GameObject FindChildWithTag(Transform parent, string tag)
-    {
-        // 부모 오브젝트의 모든 자식 오브젝트를 순회
-        foreach (Transform child in parent)
-        {
-            if (child.CompareTag(tag))  // 자식이 해당 태그를 가지고 있는지 확인
-            {
-                return child.gameObject;  // 태그가 일치하면 그 자식 오브젝트 반환
-            }
-
-            // 자식 오브젝트의 자식 오브젝트를 재귀적으로 탐색
-            GameObject result = FindChildWithTag(child, tag);
-            if (result != null)
-            {
-                return result;
-            }
-        }
-
-        // 태그를 가진 오브젝트를 찾지 못했을 경우 null 반환
-        return null;
-    }*/
-
 }
