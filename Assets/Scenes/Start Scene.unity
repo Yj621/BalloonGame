@@ -1168,7 +1168,7 @@ Transform:
   m_GameObject: {fileID: 684861351}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 958, y: 349, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1382,7 +1382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -89.919}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1928, y: -995}
+  m_AnchoredPosition: {x: -970, y: -647}
   m_SizeDelta: {x: 580.9104, y: 183.8979}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &972799924
@@ -1527,7 +1527,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -89.919}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1924.6304, y: -1130.012}
+  m_AnchoredPosition: {x: -966.6304, y: -782.01196}
   m_SizeDelta: {x: 580.9104, y: 183.8979}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1064207453
@@ -2303,7 +2303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -89.919}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1922.9451, y: -1253.4987}
+  m_AnchoredPosition: {x: -964.94507, y: -905.49866}
   m_SizeDelta: {x: 580.9104, y: 183.8979}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1367117775
@@ -2725,7 +2725,7 @@ Transform:
   m_GameObject: {fileID: 1463666802}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 958, y: 351, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2855,6 +2855,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1585780672}
         m_TargetAssemblyTypeName: StartSceneController, Assembly-CSharp
         m_MethodName: CloseRankPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1354906490}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
