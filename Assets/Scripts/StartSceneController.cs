@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Linq;
 
 public class StartSceneController : MonoBehaviour
 {
@@ -54,49 +55,46 @@ public class StartSceneController : MonoBehaviour
     }
     void SaveHighScore()
     {
-        // 현재 게임의 점수를 불러옴
         int newscore = PlayerPrefs.GetInt("ResultScore", 0);
-
-        //점수를 저장할 배열
         List<int> highScores = new List<int>();
 
-
-        //기존 저장된 점수를 불러옴
-        for(int i = 0; i < scores.Length; i++)
+        // 기존 저장된 점수 불러오기
+        for (int i = 0; i < scores.Length; i++)
         {
             highScores.Add(PlayerPrefs.GetInt("HighScore" + i, 0));
         }
 
-        //새 점수 추가
+        // 새 점수 추가
         highScores.Add(newscore);
-        //리스트에 있는 값들을 내림차순으로 정렬(a,b는 앞에 있는 값과 뒤에 있는 값을 비교하려고 사용)
-        //b가 a보다 크면 앞쪽으로 배치한다는 의미
-        //a.CompareTo(b)라고 하면 내림차순으로 정렬
+
+        // 중복 점수 제거
+        highScores = highScores.Distinct().ToList();
+
+        // 점수 내림차순 정렬
         highScores.Sort((a, b) => b.CompareTo(a));
 
-        //상위 점수를 남기기 위해 리스트 배열 크기만큼 잘라서 추출
-        //GetRange(int index, intCount) : index위치부터 시작해서 count개의 요소를 새로운 리스트로 반환
-        //Mathf.Min()함수는 전달된 두값 중에서 더 작은 값 반환
+        // 상위 점수만 남기기
         highScores = highScores.GetRange(0, Mathf.Min(scores.Length, highScores.Count));
 
-        //정렬된 점수를 다시 저장
-        for(int i=0; i<highScores.Count; i++)
+        // 정렬된 점수 다시 저장
+        for (int i = 0; i < highScores.Count; i++)
         {
             PlayerPrefs.SetInt("HighScore" + i, highScores[i]);
         }
 
-        //Text에 점수 표시
-        for(int i = 0; i<scores.Length; i++)
+        // TextMeshPro에 점수 표시
+        for (int i = 0; i < scores.Length; i++)
         {
-            if(i < highScores.Count)
+            if (i < highScores.Count)
             {
-                scores[i].text = (i+1)+". " + highScores[i].ToString();
+                scores[i].text = (i + 1) + ". " + highScores[i].ToString();
             }
             else
             {
-                scores[i].text = (i+1)+". ---";
+                scores[i].text = (i + 1) + ". ---";
             }
         }
     }
-    
+
+
 }
