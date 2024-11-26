@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class UIController : MonoBehaviour
@@ -10,6 +11,7 @@ public class UIController : MonoBehaviour
     public GameObject blockingPanel;
     public GameObject blockingimg;
     public GameObject menuPanel;
+
     public bool isPanel = false;
     public TextMeshProUGUI t_Score;
 
