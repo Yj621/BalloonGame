@@ -33,7 +33,7 @@ public class CombineBalloon : MonoBehaviour
                 if (otherBalloon.hasCollided)
                     return;
 
-                if (currentLevel < balloonLevels.Length - 1)
+                if (currentLevel < balloonLevels.Length)
                 {
                     Vector2 newPosition = ((transform.position + collision.transform.position)/2);                   
                     GameObject newBalloon = Instantiate(balloonLevels[currentLevel], newPosition, Quaternion.identity);
