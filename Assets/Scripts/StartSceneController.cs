@@ -7,6 +7,9 @@ using System.Linq;
 
 public class StartSceneController : MonoBehaviour
 {
+    public static StartSceneController Instance;  // 싱글톤 인스턴스
+
+
     public GameObject rankPanel;
     public GameObject blockingPanel;
     public TextMeshProUGUI[] scores;
@@ -16,6 +19,22 @@ public class StartSceneController : MonoBehaviour
         blockingPanel.SetActive(false);
         rankPanel.SetActive(false);
         isPanel = false;
+    }
+
+    void Awake()
+    {
+        // 싱글톤 인스턴스가 이미 존재하면 해당 객체를 파괴
+        if (Instance == null)
+        {
+            Instance = this;
+            //DontDestroyOnLoad(gameObject);  // 씬 전환 후에도 파괴되지 않도록 설정
+        }
+        /*
+        else
+        {
+            Destroy(gameObject);
+        }
+        */
     }
 
     public void Quit()
@@ -32,7 +51,6 @@ public class StartSceneController : MonoBehaviour
     {
         rankPanel.SetActive(true);
         OnBlockingPanel();
-
         SaveHighScore();
     }
 
@@ -94,7 +112,9 @@ public class StartSceneController : MonoBehaviour
                 scores[i].text = (i + 1) + ". ---";
             }
         }
+    }   
+    public void SaveHighScoreByOtherClass()
+    {
+        SaveHighScore();
     }
-
-
 }

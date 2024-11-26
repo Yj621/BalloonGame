@@ -23,11 +23,13 @@ public class UIController : MonoBehaviour
         menuPanel.SetActive(false);
         blockingPanel.SetActive(false);
         uiGameOver.SetActive(false);
+        DisplayBestScore();
     }
 
     public void MainScene()
     {
         SceneManager.LoadScene("Start Scene");
+        DisplayBestScore();
     }
 
     public void OnRestart()
@@ -72,4 +74,9 @@ public class UIController : MonoBehaviour
         isPanel = false;        
     }
 
+    public void DisplayBestScore()
+    {
+        StartSceneController.Instance.SaveHighScoreByOtherClass();
+        b_Score.text = StartSceneController.Instance.scores[0].text.Substring(2).Trim();
+    }
 }
