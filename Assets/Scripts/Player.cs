@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
         {
             OnclickMouse();
             StartCoroutine(DisableButtonTemporarily());
+            ActivateCollider();
         }
     }
 
@@ -137,6 +138,10 @@ public class Player : MonoBehaviour
         currentBalloon = Instantiate(balloonPrefabs[nextBalloonIndex], spawnPosition, Quaternion.Euler(0, 0, -90));
         currentBalloon.transform.SetParent(balloonCreate.transform);
 
+        // 생성된 (손에서 놓기 전의)풍선 인스턴스의 PolygonCollider가 비활성화 상태로 시작
+        PolygonCollider2D collider = currentBalloon.GetComponent<PolygonCollider2D>();
+        collider.enabled = false;
+
         // EdgeCollider2D의 x축 길이 계산(player 축이 풍선 크기에 따라 움직일 수 있는 범위가 변하게 하기 위함)
         EdgeCollider2D edgeCollider = currentBalloon.GetComponent<EdgeCollider2D>();
         if (edgeCollider != null)
@@ -214,6 +219,20 @@ public class Player : MonoBehaviour
         {
             int nextBalloon = balloonQueue.Peek();
             nextBalloonImage.sprite = balloonSprites[nextBalloon];
+        }
+    }
+
+    private void ActivateCollider()
+    {
+        // 클릭할 때 풍선의 콜라이더 비활성화->활성화
+        PolygonCollider2D collider = currentBalloon.GetComponent<PolygonCollider2D>();
+        if (collider != null)
+        {
+            collider.enabled = true; // 비활성화 상태에서 활성화
+        }
+        else
+        {
+            Debug.Log("ss");
         }
     }
 }
