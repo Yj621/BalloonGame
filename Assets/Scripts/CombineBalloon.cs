@@ -8,7 +8,7 @@ public class CombineBalloon : MonoBehaviour
     public GameObject[] balloonLevels; // 각 레벨의 풍선을 저장하는 배열
     public int currentLevel = 0; // 현재 풍선의 레벨
     private bool hasCollided = false; // 충돌 여부를 확인하는 변수
-    private int[] levelScores = { 2, 3, 5, 8, 12, 16, 20 }; // 각 레벨에 따른 점수 배열
+    private int[] levelScores = { 2, 3, 5, 8, 12, 16, 20, 25, 32, 40 }; // 각 레벨에 따른 점수 배열
     public static int currentScore = 0; // 게임 전체에서 기록되는 총 점수
 
     UIController uIController;
