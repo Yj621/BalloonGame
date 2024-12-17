@@ -7,8 +7,7 @@ using System.Linq;
 
 public class StartSceneController : MonoBehaviour
 {
-    public static StartSceneController Instance;  // 싱글톤 인스턴스
-
+    public static StartSceneController Instance;
 
     public GameObject rankPanel;
     public GameObject blockingPanel;
