@@ -1,43 +1,87 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SoundController : MonoBehaviour
 {
-    public Slider musicSlider;  // ½½¶óÀÌ´õ ÂüÁ¶
-    public Slider soundSlider;
-    public AudioSource[] audioSource;  // ¿Àµğ¿À ¼Ò½º ÂüÁ¶
+    public static SoundController Instance;
 
-    void Start()
+    public Slider musicSlider;           // ë°°ê²½ìŒì•… ë³¼ë¥¨ ìŠ¬ë¼ì´ë”
+    public Slider soundSlider;           // íš¨ê³¼ìŒ ë³¼ë¥¨ ìŠ¬ë¼ì´ë”
+    public AudioSource musicSource;      // ë°°ê²½ìŒì•… ì¬ìƒìš© AudioSource
+    public AudioSource soundSource;      // íš¨ê³¼ìŒ ì¬ìƒìš© AudioSource
+
+    // ì—¬ëŸ¬ íš¨ê³¼ìŒì„ ê´€ë¦¬í•˜ëŠ” Dictionary
+    public List<AudioClip> soundClips;   // Inspectorì—ì„œ íš¨ê³¼ìŒ ëª©ë¡ ì¶”ê°€
+    private Dictionary<string, AudioClip> soundDictionary;
+
+    private void Awake()
     {
-        // ½½¶óÀÌ´õÀÇ °ªÀÌ º¯°æµÉ ¶§¸¶´Ù OnMusicChange ÇÔ¼ö È£Ãâ
-        musicSlider.onValueChanged.AddListener(OnMusicChange);
-
-        // ½½¶óÀÌ´õ °ªÀ» AudioSource º¼·ı°ú µ¿±âÈ­ (ÃÊ±â°ª ¼³Á¤)
-        musicSlider.value = audioSource[0].volume;
-
-        // ½½¶óÀÌ´õÀÇ °ªÀÌ º¯°æµÉ ¶§¸¶´Ù OnMusicChange ÇÔ¼ö È£Ãâ
-        soundSlider.onValueChanged.AddListener(OnSoundChange);
-
-        // ½½¶óÀÌ´õ °ªÀ» AudioSource º¼·ı°ú µ¿±âÈ­ (ÃÊ±â°ª ¼³Á¤)
-        soundSlider.value = audioSource[1].volume;
+        // ì‹±ê¸€í†¤ ì„¤ì •
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // ½½¶óÀÌ´õ °ªÀÌ º¯°æµÉ ¶§ ½ÇÇàµÇ´Â ÇÔ¼ö
-    void OnMusicChange(float value)
+    private void Start()
     {
-        audioSource[0].volume = value;
+        // Dictionaryì— íš¨ê³¼ìŒ ì¶”ê°€
+        soundDictionary = new Dictionary<string, AudioClip>();
+        foreach (var clip in soundClips)
+        {
+            soundDictionary[clip.name] = clip; // ì´ë¦„ì„ í‚¤ë¡œ ì‚¬ìš©
+        }
+
+        // ë°°ê²½ìŒì•… ìŠ¬ë¼ì´ë” ì„¤ì •
+        if (musicSlider != null)
+        {
+            musicSlider.value = musicSource.volume;
+            musicSlider.onValueChanged.AddListener(SetMusicVolume);
+        }
+
+        // íš¨ê³¼ìŒ ìŠ¬ë¼ì´ë” ì„¤ì •
+        if (soundSlider != null)
+        {
+            soundSlider.value = soundSource.volume;
+            soundSlider.onValueChanged.AddListener(SetSoundVolume);
+        }
     }
 
-    void OnSoundChange(float value)
+    /// <summary>
+    /// ë°°ê²½ìŒì•… ë³¼ë¥¨ ì„¤ì •
+    /// </summary>
+    void SetMusicVolume(float value)
     {
-        audioSource[1].volume = value;
+        musicSource.volume = value;
     }
 
-    public void PlayBtnSound()
+    /// <summary>
+    /// íš¨ê³¼ìŒ ë³¼ë¥¨ ì„¤ì •
+    /// </summary>
+    void SetSoundVolume(float value)
     {
-        audioSource[1].Play();
+        soundSource.volume = value;
+    }
+
+    /// <summary>
+    /// íŠ¹ì • ë²„íŠ¼ ì†Œë¦¬ ì¬ìƒ
+    /// </summary>
+    public void PlaySoundEffect(string soundName)
+    {
+        if (soundDictionary.ContainsKey(soundName))
+        {
+            soundSource.PlayOneShot(soundDictionary[soundName]);
+            Debug.Log("íš¨ê³¼ìŒ ì¬ìƒ: " + soundName);
+        }
+        else
+        {
+            Debug.LogWarning("í•´ë‹¹ íš¨ê³¼ìŒì´ ì—†ìŠµë‹ˆë‹¤: " + soundName);
+        }
     }
 }
-

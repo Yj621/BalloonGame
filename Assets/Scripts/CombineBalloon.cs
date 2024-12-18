@@ -1,15 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CombineBalloon : MonoBehaviour
 {
     public GameObject[] balloonLevels; // 각 레벨의 풍선을 저장하는 배열
-    public int currentLevel = 0; // 현재 풍선의 레벨
-    private bool hasCollided = false; // 충돌 여부를 확인하는 변수
-    private int[] levelScores = { 2, 3, 5, 8, 12, 16, 20, 25, 32, 40 }; // 각 레벨에 따른 점수 배열
-    public static int currentScore = 0; // 게임 전체에서 기록되는 총 점수
+    public int currentLevel = 0;       // 현재 풍선의 레벨
+    private bool hasCollided = false;  // 충돌 여부를 확인하는 변수
+    private int[] levelScores = { 2, 3, 5, 8, 12, 16, 20, 25, 32, 40 }; // 점수 배열
+    public static int currentScore = 0; // 총 점수
+
+    public string combineSoundName = "CombineSound"; // 결합 효과음 이름
+    public string bombSoundName = "BombSound";       // 폭발 효과음 이름
 
     UIController uIController;
 
@@ -27,53 +28,45 @@ public class CombineBalloon : MonoBehaviour
         {
             CombineBalloon otherBalloon = collision.gameObject.GetComponent<CombineBalloon>();
 
-
             if (otherBalloon != null && otherBalloon.currentLevel == this.currentLevel)
             {
+                // 레벨 10인 경우 폭발 소리 재생 후 삭제
+                if (currentLevel == 10)
+                {
+                    SoundController.Instance.PlaySoundEffect(bombSoundName);
+                    Destroy(collision.gameObject);
+                    Destroy(gameObject);
+                    return;
+                }
+
                 if (otherBalloon.hasCollided)
                     return;
 
                 if (currentLevel < balloonLevels.Length)
                 {
-                    Vector2 newPosition = ((transform.position + collision.transform.position)/2);                   
+                    Vector2 newPosition = ((transform.position + collision.transform.position) / 2);
                     GameObject newBalloon = Instantiate(balloonLevels[currentLevel], newPosition, Quaternion.identity);
 
-                    Collider2D newBalloonCollider = newBalloon.GetComponent<Collider2D>();
-                    if (newBalloonCollider != null)
-                    {
-                        newBalloonCollider.enabled = false;
-                        StartCoroutine(ReenableCollider(newBalloonCollider, 0.5f));
-                    }
-
+                    StartCoroutine(ReenableCollider(newBalloon.GetComponent<Collider2D>(), 0.5f));
                     hasCollided = true;
                     otherBalloon.hasCollided = true;
+
+                    // 결합 효과음 재생
+                    SoundController.Instance.PlaySoundEffect(combineSoundName);
                 }
 
                 currentScore += levelScores[currentLevel];
-
                 uIController.t_Score.text = currentScore.ToString();
 
-
                 Destroy(collision.gameObject);
-                //Destroy(transform.parent.gameObject);
                 Destroy(gameObject);
             }
         }
+    }
 
-        Invoke(nameof(Release), 2f);
-    }
-    public void Release()
-    {
-        Dead.Instance.isReleased = true;
-    }
     private IEnumerator ReenableCollider(Collider2D collider, float delay)
     {
         yield return new WaitForSeconds(delay);
-        collider.enabled = true;
-    }
-
-    public void SetCurrentScoreToZero()
-    {
-        currentScore = 0;
+        if (collider != null) collider.enabled = true;
     }
 }

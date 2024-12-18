@@ -70,14 +70,19 @@ public class Player : MonoBehaviour
         {
             if (!balloonReleased)
             {
+                // ClickSound 재생
+                SoundController.Instance.PlaySoundEffect("ClickSound");
+
                 ReleaseBalloon();
                 ApplyUpwardForce();
                 Dead.Instance.isReleased = true;
+
                 SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
                 spriteRenderer.sprite = putSprite;
             }
         }
     }
+
 
     private void FollowMouse()
     {
