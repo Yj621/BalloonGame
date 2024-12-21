@@ -237,7 +237,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("ss");
+            Debug.Log("Cannot find collider");
         }
     }
 }

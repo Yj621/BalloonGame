@@ -51,6 +51,10 @@ public class CombineBalloon : MonoBehaviour
                     hasCollided = true;
                     otherBalloon.hasCollided = true;
 
+                    //합쳐져서 생긴 풍선의 isReleae값을 true로 초기화
+                    Dead dead = newBalloon.GetComponent<Dead>();
+                    dead.isReleased = true;
+
                     // 결합 효과음 재생
                     SoundController.Instance.PlaySoundEffect(combineSoundName);
                 }
