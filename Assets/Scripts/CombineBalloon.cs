@@ -73,4 +73,9 @@ public class CombineBalloon : MonoBehaviour
         yield return new WaitForSeconds(delay);
         if (collider != null) collider.enabled = true;
     }
+
+    public void SetCurrentScoreToZero()
+    {
+        currentScore = 0;
+    }
 }
