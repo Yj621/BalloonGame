@@ -8,6 +8,7 @@ using System.Linq;
 public class StartSceneController : MonoBehaviour
 {
     public static StartSceneController Instance;
+    public AudioClip startSceneBGM; // 시작화면 BGM
 
     public GameObject rankPanel;
     public GameObject blockingPanel;
@@ -18,6 +19,10 @@ public class StartSceneController : MonoBehaviour
         blockingPanel.SetActive(false);
         rankPanel.SetActive(false);
         isPanel = false;
+        if (startSceneBGM != null)
+        {
+            SoundController.Instance.PlayBGM(startSceneBGM);
+        }
     }
 
     void Awake()

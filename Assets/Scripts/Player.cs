@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField]private GameObject player;
     public GameObject[] balloonPrefabs; // 각 단계의 풍선 프리팹 배열 (빨주노초파 순서)
+    public AudioClip playSceneBGM;
     public Queue<int> balloonQueue = new Queue<int>();  // 풍선 큐
     public Image nextBalloonImage;  // 다음 풍선을 표시할 UI Image
     public Sprite[] balloonSprites; // 풍선 이미지 배열
@@ -37,6 +38,10 @@ public class Player : MonoBehaviour
         GenerateBalloonQueue();
         SpawnNewBalloon();
         balloonCreate = player.transform.Find("Balloon").gameObject; // "Balloon" 오브젝트 찾기
+        if (playSceneBGM != null)
+        {
+            SoundController.Instance.PlayBGM(playSceneBGM);
+        }
     }
 
     private void Update()

@@ -30,6 +30,8 @@ public class UIController : MonoBehaviour
     {
         SceneManager.LoadScene("Start Scene");
         DisplayBestScore();
+        SoundController.Instance.StopBGM();
+        SceneManager.LoadScene("Start Scene");
     }
 
     public void OnRestart()

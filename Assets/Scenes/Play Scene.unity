@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641287, b: 0.5748173, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1206,6 +1206,7 @@ MonoBehaviour:
   - {fileID: 8404715589136038492, guid: 73295adf3bace70499872764c7dd4213, type: 3}
   - {fileID: 8404715589136038492, guid: 78ef520c0aa3ccb4fbed71b172573ba5, type: 3}
   - {fileID: 8404715589136038492, guid: f4be350856cf3c74081e297172349e1c, type: 3}
+  playSceneBGM: {fileID: 8300000, guid: 180182ad375d3434caa65dab61cb9ac1, type: 3}
   nextBalloonImage: {fileID: 1737449004}
   balloonSprites:
   - {fileID: 21300000, guid: 0a1a9efb764d7e7418ec7f30a33dc2d9, type: 3}
@@ -5756,6 +5757,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bed62049dd6754140ac0f89821753aa8, type: 3}
   - {fileID: 8300000, guid: 04abb3738053a43e0ab6cacb806d84c3, type: 3}
   - {fileID: 8300000, guid: 98181a95b4310e041911a739e40394de, type: 3}
+  bgmClips: []
 --- !u!1 &1331793586
 GameObject:
   m_ObjectHideFlags: 0
@@ -6702,7 +6704,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 180182ad375d3434caa65dab61cb9ac1, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1

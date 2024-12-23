@@ -1,55 +1,123 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SoundController : MonoBehaviour
 {
     public static SoundController Instance;
 
-    public Slider musicSlider;           // 배경음악 볼륨 슬라이더
-    public Slider soundSlider;           // 효과음 볼륨 슬라이더
-    public AudioSource musicSource;      // 배경음악 재생용 AudioSource
-    public AudioSource soundSource;      // 효과음 재생용 AudioSource
+    public Slider musicSlider;
+    public Slider soundSlider;
+    public AudioSource musicSource;  // BGM 재생용
+    public AudioSource soundSource;  // 효과음 재생용
+    
+    public List<AudioClip> soundClips;  // 효과음 목록
+    public List<BGMClip> bgmClips;      // 씬 별 BGM 목록
 
-    // 여러 효과음을 관리하는 Dictionary
-    public List<AudioClip> soundClips;   // Inspector에서 효과음 목록 추가
     private Dictionary<string, AudioClip> soundDictionary;
+    private Dictionary<string, AudioClip> bgmDictionary;
+
+    [System.Serializable]
+    public class BGMClip
+    {
+        public string sceneName;
+        public AudioClip bgmClip;
+    }
 
     private void Awake()
     {
-        // 싱글톤 설정
+        // 싱글톤 설정 (중복 방지)
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);  // 씬 전환 시에도 유지
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject);  // 중복 생성 방지
+            return;
         }
     }
 
     private void Start()
     {
-        // Dictionary에 효과음 추가
+        // 효과음 초기화
         soundDictionary = new Dictionary<string, AudioClip>();
         foreach (var clip in soundClips)
         {
-            soundDictionary[clip.name] = clip; // 이름을 키로 사용
+            soundDictionary[clip.name] = clip;
         }
 
-        // 배경음악 슬라이더 설정
-        if (musicSlider != null)
+        // 씬별 BGM 초기화
+        bgmDictionary = new Dictionary<string, AudioClip>();
+        foreach (var bgm in bgmClips)
         {
-            musicSlider.value = musicSource.volume;
-            musicSlider.onValueChanged.AddListener(SetMusicVolume);
+            bgmDictionary[bgm.sceneName] = bgm.bgmClip;
         }
 
-        // 효과음 슬라이더 설정
-        if (soundSlider != null)
+        // 씬 전환 감지 (씬 로드 시 BGM 변경)
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // 현재 씬 BGM 재생
+        PlayBGMForScene(SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>
+    /// 씬이 로드될 때 호출 (BGM 변경)
+    /// </summary>
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        PlayBGMForScene(scene.name);
+    }
+
+    /// <summary>
+    /// 씬 이름에 맞는 BGM 재생
+    /// </summary>
+    public void PlayBGMForScene(string sceneName)
+    {
+        if (bgmDictionary.ContainsKey(sceneName))
         {
-            soundSlider.value = soundSource.volume;
-            soundSlider.onValueChanged.AddListener(SetSoundVolume);
+            PlayBGM(bgmDictionary[sceneName]);
+        }
+        else
+        {
+            StopBGM();
+        }
+    }
+
+    /// <summary>
+    /// BGM 재생
+    /// </summary>
+    public void PlayBGM(AudioClip bgmClip)
+    {
+        if (musicSource.clip == bgmClip && musicSource.isPlaying)
+            return;
+
+        musicSource.clip = bgmClip;
+        musicSource.loop = true;
+        musicSource.Play();
+    }
+
+    /// <summary>
+    /// BGM 정지
+    /// </summary>
+    public void StopBGM()
+    {
+        if (musicSource.isPlaying)
+        {
+            musicSource.Stop();
+        }
+    }
+
+    /// <summary>
+    /// 효과음 재생
+    /// </summary>
+    public void PlaySoundEffect(string soundName)
+    {
+        if (soundDictionary.ContainsKey(soundName))
+        {
+            soundSource.PlayOneShot(soundDictionary[soundName]);
         }
     }
 
@@ -68,20 +136,15 @@ public class SoundController : MonoBehaviour
     {
         soundSource.volume = value;
     }
-
-    /// <summary>
-    /// 특정 버튼 소리 재생
-    /// </summary>
-    public void PlaySoundEffect(string soundName)
+    public void PlayBtnSound()
     {
-        if (soundDictionary.ContainsKey(soundName))
+        if (soundSource != null && soundDictionary.ContainsKey("ClickSound"))
         {
-            soundSource.PlayOneShot(soundDictionary[soundName]);
-            Debug.Log("효과음 재생: " + soundName);
+            soundSource.PlayOneShot(soundDictionary["ClickSound"]);
         }
         else
         {
-            Debug.LogWarning("해당 효과음이 없습니다: " + soundName);
+            Debug.LogWarning("ClickSound가 존재하지 않거나 AudioSource가 없습니다.");
         }
     }
 }
