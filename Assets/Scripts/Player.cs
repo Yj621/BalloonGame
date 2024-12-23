@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public GameObject player;
+    [SerializeField]private GameObject player;
     public GameObject[] balloonPrefabs; // 각 단계의 풍선 프리팹 배열 (빨주노초파 순서)
     public Queue<int> balloonQueue = new Queue<int>();  // 풍선 큐
     public Image nextBalloonImage;  // 다음 풍선을 표시할 UI Image
