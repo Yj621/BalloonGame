@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Balloon
   - Dead
+  - MusicSlider
+  - SoundSlider
   layers:
   - Default
   - TransparentFX

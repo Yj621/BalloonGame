@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         balloonCreate = player.transform.Find("Balloon").gameObject; // "Balloon" 오브젝트 찾기
         if (playSceneBGM != null)
         {
-            SoundController.Instance.PlayBGM(playSceneBGM);
+            SoundController.Instance.PlayBGM(SoundController.Instance.musicSource2, playSceneBGM);
         }
     }
 

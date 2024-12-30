@@ -11,6 +11,7 @@ public class StartSceneController : MonoBehaviour
     public AudioClip startSceneBGM; // 시작화면 BGM
 
     public GameObject rankPanel;
+    public GameObject menuPanel;
     public GameObject blockingPanel;
     public TextMeshProUGUI[] scores;
     private bool isPanel;
@@ -21,7 +22,7 @@ public class StartSceneController : MonoBehaviour
         isPanel = false;
         if (startSceneBGM != null)
         {
-            SoundController.Instance.PlayBGM(startSceneBGM);
+            SoundController.Instance.PlayBGM(SoundController.Instance.musicSource, startSceneBGM);
         }
     }
 
@@ -74,6 +75,11 @@ public class StartSceneController : MonoBehaviour
     {
         blockingPanel.SetActive(false);
         isPanel = false;
+    }
+    public void OnBtnMenu()
+    {
+        OnBlockingPanel();
+        menuPanel.SetActive(true);
     }
     void SaveHighScore()
     {
