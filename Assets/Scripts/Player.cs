@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
                     Dead.Instance.isReleased = true;
                 }
             }
-        }
+        }      
 
         Invoke(nameof(SpawnNewBalloon), 0.5f);
         UpdateNextBalloonUI();  // UI 업데이트
