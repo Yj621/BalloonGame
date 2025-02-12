@@ -44,7 +44,7 @@ public class CombineBalloon : MonoBehaviour
 
                 if (currentLevel < balloonLevels.Length)
                 {
-                    Vector2 newPosition = Vector2.Lerp(transform.position, collision.transform.position, 0.5f);
+                    Vector2 newPosition = Vector2.Lerp(transform.position, collision.transform.position, 0.9f);
 
                     GameObject newBalloon = Instantiate(balloonLevels[currentLevel], newPosition, Quaternion.identity);
         
