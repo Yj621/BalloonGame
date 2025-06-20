@@ -29,13 +29,13 @@ public class UIController : MonoBehaviour
     public void MainScene()
     {
         SoundController.Instance.StopAllBGM();  // 씬 전환 전에 모든 BGM 중지
-        SceneManager.LoadScene("Start Scene");
+        SceneManager.LoadScene("MobileStart");
     }
 
     public void StartScene()
     {
         SoundController.Instance.StopAllBGM();  // PlayScene 진입 전에 BGM 중지
-        SceneManager.LoadScene("Play Scene");
+        SceneManager.LoadScene("MobilePlay");
     }
 
     public void OnRestart()

@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
     private ConstantForce2D consForce;
     private Rigidbody2D balloonRb;
 
-    private float minX = -5.44f; // x축의 최소 위치
-    private float maxX = 5.1f;  // x축의 최대
+    private float minX = -3.6f; // x축의 최소 위치
+    private float maxX = 2.5f;  // x축의 최대
     private float upwardForce = 10.0f; // 위쪽으로 가하는 힘의 크기
     private float shuffledBalloonWidth; //셔플한 풍선의 x값
 

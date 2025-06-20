@@ -145,11 +145,11 @@ public class SoundController : MonoBehaviour
     {
         AudioClip bgmClip = bgmDictionary[sceneName];
 
-        if (sceneName == "Start Scene")
+        if (sceneName == "MobileStart")
         {
             PlayBGM(musicSource, bgmClip);  // StartScene에서 BGM 재생
         }
-        else if (sceneName == "Play Scene")
+        else if (sceneName == "MobilePlay")
         {
             PlayBGM(musicSource2, bgmClip);  // PlayScene에서 BGM 재생
         }

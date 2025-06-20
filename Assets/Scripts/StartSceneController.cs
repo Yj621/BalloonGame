@@ -49,7 +49,7 @@ public class StartSceneController : MonoBehaviour
 
     public void StartScene()
     {
-        SceneManager.LoadScene("Play Scene");
+        SceneManager.LoadScene("MobilePlay");
     }
 
     public void Rank()
@@ -119,7 +119,7 @@ public class StartSceneController : MonoBehaviour
             }
             else
             {
-                scores[i].text = (i + 1) + ". ---";
+                scores[i].text = (i + 1) + ". 0";
             }
         }
     }   
