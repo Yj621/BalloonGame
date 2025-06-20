@@ -19,6 +19,7 @@ public class StartSceneController : MonoBehaviour
     {
         blockingPanel.SetActive(false);
         rankPanel.SetActive(false);
+        menuPanel.SetActive(false);
         isPanel = false;
         if (startSceneBGM != null)
         {

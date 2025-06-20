@@ -14,7 +14,7 @@ public class SoundController : MonoBehaviour
     [Header("Audio Sources")]
     public AudioSource musicSource, musicSource2;  // StartScene, PlayScene BGM용
     public AudioSource soundSource;  // 효과음 재생용
-    
+
     [Header("Audio Clips")]
     public List<AudioClip> soundClips;  // 효과음 목록
     public List<BGMClip> bgmClips;      // 씬 별 BGM 목록
@@ -60,22 +60,23 @@ public class SoundController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-    }
-    
 
-    private void Start()
-    {
         // 효과음 및 BGM 초기화
         InitializeAudioDictionaries();
 
-        // 슬라이더 초기화
-        InitializeSliders();
+        // 현재 씬 BGM 재생
+        PlayBGMForScene(SceneManager.GetActiveScene().name);
+    }
+
+
+    private void Start()
+    {
 
         // 씬 로드 이벤트 등록
         SceneManager.sceneLoaded += OnSceneLoaded;
+        // 슬라이더 초기화
+        InitializeSliders();
 
-        // 현재 씬 BGM 재생
-        PlayBGMForScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>
@@ -88,6 +89,7 @@ public class SoundController : MonoBehaviour
 
         // 새 씬에서 슬라이더 찾기 및 동기화
         FindSlidersInScene();
+        InitializeSliders();
     }
 
     /// <summary>
@@ -137,28 +139,34 @@ public class SoundController : MonoBehaviour
     /// 씬 이름에 맞는 BGM 재생
     /// </summary>
     public void PlayBGMForScene(string sceneName)
-{
-    // 씬 전환 전에 모든 BGM을 중지
-    StopAllBGM();
-
-    if (bgmDictionary.ContainsKey(sceneName))
     {
-        AudioClip bgmClip = bgmDictionary[sceneName];
+        // 씬 전환 전에 모든 BGM을 중지
+        StopAllBGM();
 
-        if (sceneName == "MobileStart")
+        if (bgmDictionary.ContainsKey(sceneName))
         {
-            PlayBGM(musicSource, bgmClip);  // StartScene에서 BGM 재생
-        }
-        else if (sceneName == "MobilePlay")
-        {
-            PlayBGM(musicSource2, bgmClip);  // PlayScene에서 BGM 재생
+
+            AudioClip bgmClip = bgmDictionary[sceneName];
+            
+            Debug.Log($"[BGM] PlayBGMForScene 호출 – scene: {sceneName}, hasKey: {bgmDictionary.ContainsKey(sceneName)}");
+            if (!bgmDictionary.ContainsKey(sceneName)) return;
+
+            Debug.Log($"[BGM] clip: {bgmClip}");
+
+            if (sceneName == "MobileStart")
+            {
+                PlayBGM(musicSource, bgmClip);  // StartScene에서 BGM 재생
+            }
+            else if (sceneName == "MobilePlay")
+            {
+                PlayBGM(musicSource2, bgmClip);  // PlayScene에서 BGM 재생
+            }
         }
     }
-}
 
-/// <summary>
-/// 모든 BGM 중지
-/// </summary>
+    /// <summary>
+    /// 모든 BGM 중지
+    /// </summary>
 
 
     /// <summary>
